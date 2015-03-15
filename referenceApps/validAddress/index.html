@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Delivery Manager</title>
+    <title>addressValid Directive Test</title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic'
           rel='stylesheet' type='text/css'>
-    <link href="../../../Nerium.Global.Web/assets/css/adomanager/main.css" rel="stylesheet"/>
+
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../../../Nerium.Global.Web/assets/vendor/qtip2/jquery.qtip.css" rel="stylesheet"/>
+
     <style>
         .test-scenario {
             margin-top: 20px;
@@ -120,6 +120,7 @@
     </style>
 </head>
 <body data-ng-app="app" style="padding: 2rem;">
+<a href="http://duke83.github.io/referenceApps/validAddress/index.html">http://duke83.github.io/referenceApps/validAddress/index.html</a>
 
 <div data-ng-controller="validAddressTestCtrl" class="test-scenario">
 
@@ -127,7 +128,6 @@
         check address suggestion for: <input type="text" data-ng-model="currentindex" style="width:50px">
 <button data-ng-click="runTest()">runTest</button>
     </span>
-
 
 
     <div data-ng-repeat="addr in addresses" style="margin:30px;">
@@ -142,6 +142,7 @@
         <input ng-model="addr.state" placeholder="state" class="app-input">
         <input ng-model="addr.zip" placeholder="zip" class="app-input">
         <input ng-model="addr.instructions" placeholder="Instructions" class="app-input">
+
         <div style="font-size:smaller; color:gray">{{addr}}</div>
     </div>
 
@@ -149,16 +150,14 @@
 </div>
 
 
-<script src="../../../Nerium.Global.Web/assets/vendor/jquery/dist/jquery.min.js"></script>
-<script src="../../../Nerium.Global.Web/assets/vendor/angular.js"></script>
+<script src="vendor_local/jquery.min.js"></script>
+<script src="vendor_local/angular.js"></script>
 
 <!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
 <script src="app.js"></script>
 <script src="validAddressTestCtrl.js"></script>
 <script src="validAddressDirective.js"></script>
-<script src="../../app/validAddress/validAddressService.js"></script>
 <script src="serverApiFake.js"></script>
-
 
 
 </body>
