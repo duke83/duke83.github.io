@@ -1,0 +1,33 @@
+<div ng-show="ParentAddressFailsValidation">
+
+    <div ng-show="SuggestedAddress">
+        <hr>
+
+        <input id="addressSourceSuggested{{addressidentifier}}" type="radio" ng-model="addressSource"
+               name="addressSource" value="suggested" data-ng-change="selectAddress('suggested')">
+        <label for="addressSourceSuggested{{addressidentifier}}">Is this the address you mean?</label>
+
+        <div class="address-line">
+            <span class="ng-binding" data-ng-bind="SuggestedAddress.address1"></span>
+        </div>
+
+        <div class="address-line">
+            <span class="ng-binding" data-ng-bind="SuggestedAddress.address2"></span>
+        </div>
+        <div class="address-line">
+            <span class="ng-binding" data-ng-bind="SuggestedAddress.city"></span>
+            ,
+            <span class="ng-binding" data-ng-bind="SuggestedAddress.state"></span>
+            <span class="ng-binding" data-ng-bind="SuggestedAddress.zip"></span>
+        </div>
+    </div>
+
+    <hr>
+
+    <input id="addressSourceOverride{{addressidentifier}}" type="radio" ng-model="addressSource" name="addressSource"
+           value="override" data-ng-change="selectAddress('override')">
+    <label for="addressSourceOverride{{addressidentifier}}">I am sure I want to use this address</label>
+    <button ng-click="setUserInput()">ok</button>
+
+
+</div>
