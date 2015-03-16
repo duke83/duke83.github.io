@@ -18,25 +18,8 @@
 
                     // The promise is resolved if the server returns isValid
                     // OR if the user has expressed approval to override server validation.
-                    //$scope.address.hasApproval = function () {
-                    //    var deferred = $q.defer();
-                    //
-                    //    serverApi.validateShippingAddress($scope.address)
-                    //        .then(function (data) {
-                    //            console.log('serverApi returns to .then ', data)
-                    //            $scope.ParentAddressFailsValidation=true;
-                    //            $scope.SuggestedAddress=true;
-                    //        })
-                    //        .catch(
-                    //        function (errrodata) {
-                    //            console.log('oh damn, ', errrodata)
-                    //        })
-                    //
-                    //    return deferred.promise;
-                    //};
-                    //
-                    //
 
+                    $scope.SuggestedAddress = {};
 
                     // THIS PROMISE WILL BE RESOLVED WHEN
                     // SOME EXTERNAL PROCESS CHECKS IF ADDRESS IS VALID
@@ -49,41 +32,62 @@
 
 
                     $scope.address.hasApproval = function () {
-                        $scope.ParentAddressFailsValidation=true;
-                        $scope.SuggestedAddress=true;
-
+                        checkServer();
                         return hasApproval_deferred.promise;
                     }
 
 
 
+                    //THIS IS CALLED WHEN USER CLICKS OK BUTTON
                     $scope.setUserInput = function () {
-                        console.log('setting user input.  about to resolve hasApproval_deferred');
-                        hasApproval_deferred.resolve({result:'test1'});
-                        //userInput_deferred.resolve({result: true})
+                        //user must have selected a radio button
+                        if($scope.addressSource=="suggested" | $scope.addressSource=="override"  ) {
+                            //HIDE DIRECTIVE UI
+                            $scope.ParentAddressFailsValidation = false;
+                            console.log('setting user input.  about to resolve hasApproval_deferred');
+                            hasApproval_deferred.resolve({hasApproval: true});
+                        }
                     }
 
 
                     function checkServer() {
                         serverApi.validateShippingAddress($scope.address) //
                             .then(function (data) {
-                                console.log('serverApi returns to .then ', data)
+                                console.log('serverApi returns to .then ', data);
 
                                 //show UI if original address is not valid
                                 if (!data.isValid) {
                                     $scope.ParentAddressFailsValidation = true;
-                                    //then, only allow address resolution when user clicks OK
 
+                                    //serverApi may not always return a suggested address
+                                    if(data.autoOrderReturnAddressDto) {
+                                        handleSuggestedAddress(data.autoOrderReturnAddressDto);
+
+                                    }
+                                    //then, only allow address resolution when user clicks OK
                                 }
-                                $scope.SuggestedAddress = true;
+
+                                //the original address IS valid
+                                else{
+                                    $scope.ParentAddressFailsValidation = false;
+                                    $scope.SuggestedAddress = false;
+                                    hasApproval_deferred.resolve({isValid:true});
+                                }
                             })
                             .catch(
                             function (errrodata) {
                                 console.log('oh damn, ', errrodata)
                             })
-
-
                     }
+
+                    function handleSuggestedAddress(suggestedAdress){
+                            $scope.SuggestedAddress = {
+                                "address1": suggestedAdress.address1,
+                                "address2": suggestedAdress.address2,
+                                "city": suggestedAdress.city,
+                                "state": suggestedAdress.state,
+                                "zip": suggestedAdress.zip
+                        }}
 
 
                     $scope.GetSuggestedAddress = function () {
