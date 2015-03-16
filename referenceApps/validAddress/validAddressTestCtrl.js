@@ -4,6 +4,7 @@ var app = angular.module('app', []);
 app.controller('validAddressTestCtrl', ['$scope', function ($scope) {
 
     $scope.currentindex = 0;
+    $scope.testResult="";
 
     $scope.runTest = function () {
         for (var i = 0; i < $scope.addresses.length; i++) {
@@ -11,6 +12,7 @@ app.controller('validAddressTestCtrl', ['$scope', function ($scope) {
               $scope.addresses[i].hasApproval()
                   .then(function(data){
                     console.log('the resolution of approval is:', data)
+                      $scope.testResult=data;
                 })
             }
         }

@@ -18,7 +18,7 @@
 
                     // The promise is resolved if the server returns isValid
                     // OR if the user has expressed approval to override server validation.
-
+                    $scope.addressidentifier=$scope.$id;
                     $scope.SuggestedAddress = {};
 
                     // THIS PROMISE WILL BE RESOLVED WHEN
@@ -45,7 +45,7 @@
                             //HIDE DIRECTIVE UI
                             $scope.ParentAddressFailsValidation = false;
                             console.log('setting user input.  about to resolve hasApproval_deferred');
-                            hasApproval_deferred.resolve({hasApproval: true});
+                            hasApproval_deferred.resolve({hasApproval: true, address:$scope.address});
                         }
                     }
 
