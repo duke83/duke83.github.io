@@ -56,7 +56,8 @@
                     function validateShippingAddress(addressDto) {
                         var url = webConfig.digOpsApiUrl + '/AutoOrderManager/ValidateShippingAddress';
                         var url = 'serverValidateShippingAddressFake.json'
-                        return $http.post(url, addressDto);
+                        //return $http.post(url, addressDto);
+                        return $http.get(url, addressDto);
                         return
                     }
 
