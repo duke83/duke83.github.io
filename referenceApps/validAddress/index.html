@@ -120,7 +120,7 @@
     </style>
 </head>
 <body data-ng-app="app" style="padding: 2rem;">
-<a href="http://duke83.github.io/referenceApps/validAddress/index.html">http://duke83.github.io/referenceApps/validAddress/index.html</a>
+<a href="http://duke83.github.io/referenceApps/validAddress/index.html">http://duke83.github.io/referenceApps/addressSuggestion/index.html</a>
 
 <div data-ng-controller="validAddressTestCtrl" class="test-scenario">
 
@@ -134,7 +134,7 @@
         <input ng-model="addr.firstName" placeholder="First Name" class="app-input">
         <input ng-model="addr.lastName" placeholder="Last Name" class="app-input">
 
-        <valid-address ng-attr-address="addr"></valid-address>
+        <address-suggestion ng-attr-address="addr"></address-suggestion>
 
         <input ng-model="addr.address1" placeholder="address1" class="app-input">
         <input ng-model="addr.address2" placeholder="address2" class="app-input">
@@ -156,7 +156,7 @@
 <!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
 <script src="app.js"></script>
 <script src="validAddressTestCtrl.js"></script>
-<script src="validAddressDirective.js"></script>
+<script src="addressSuggestionDirective.js"></script>
 <script src="serverApiFake.js"></script>
 
 

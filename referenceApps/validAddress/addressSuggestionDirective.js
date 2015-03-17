@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('app')
-        .directive('validAddress', function ($rootScope, serverApi, $q) {
+        .directive('addressSuggestion', function ($rootScope, serverApi, $q) {
             return {
                 restrict: 'E',
                 scope: {
@@ -51,7 +51,18 @@
 
 
                     function checkServer() {
-                        serverApi.validateShippingAddress($scope.address) //
+
+                        //ok, so we are assuming the spelling on $scope.address properties is a certain way.  This is a point to document.
+                        var remappedDto = {
+                            AddressLine1: $scope.address.address1,
+                            AddressLine2: $scope.address.address2,
+                            City: $scope.address.city,
+                            CountryCode: $scope.address.country,
+                            Territory: $scope.address.state,
+                            PostalCode: $scope.address.zip
+                        };
+
+                        serverApi.validateShippingAddress(remappedDto) //
                             .then(function (data) {
                                 console.log('serverApi returns to .then ', data);
 
@@ -90,56 +101,16 @@
                         }}
 
 
-                    $scope.GetSuggestedAddress = function () {
-                        $scope.SuggestedAddress = null;
-
-                        //ok, so we are assuming the spelling on $scope.address properties is a certain way.  This is a point to document.
-                        var remappedDto = {
-                            AddressLine1: $scope.address.address1,
-                            AddressLine2: $scope.address.address2,
-                            City: $scope.address.city,
-                            CountryCode: $scope.address.country,
-                            Territory: $scope.address.state,
-                            PostalCode: $scope.address.zip
-                        };
-
-                        serverApi.validateShippingAddress(remappedDto)
-                            .success(function (addressValidityData) {
-                                if (addressValidityData) {
-                                    if (addressValidityData.isValid) {
-                                        $scope.address.userApproved = true;
-                                        return;
-                                    }
-                                    $scope.ParentAddressFailsValidation = true; //binding to show directive UI
-
-                                    //serverApi may not always return a suggested address
-                                    if (addressValidityData.autoOrderReturnAddressDto) {
-                                        $scope.SuggestedAddress = {
-                                            "address1": addressValidityData.autoOrderReturnAddressDto.address1,
-                                            "address2": addressValidityData.autoOrderReturnAddressDto.address2,
-                                            "city": addressValidityData.autoOrderReturnAddressDto.city,
-                                            "state": addressValidityData.autoOrderReturnAddressDto.state,
-                                            "zip": addressValidityData.autoOrderReturnAddressDto.zip
-                                        }
-                                    }
-                                    ;
-                                    return;
-                                }
-                            })
-                            .error(function (addressValidityData) {
-                                console.log(addressValidityData.message);
-                            });
-                    };
 
                     //Triggered by user checking radio button
                     $scope.selectAddress = function () {
                         // $scope.addressSource is 'suggested' | 'override'
                         if ($scope.addressSource === 'suggested') {
-                            $scope.address.address1 = angular.copy($scope.SuggestedAddress.address1);
-                            $scope.address.address2 = angular.copy($scope.SuggestedAddress.address2);
-                            $scope.address.city = angular.copy($scope.SuggestedAddress.city);
-                            $scope.address.state = angular.copy($scope.SuggestedAddress.state);
-                            $scope.address.zip = angular.copy($scope.SuggestedAddress.zip);
+                            $scope.address.address1 = SuggestedAddress.address1;
+                            $scope.address.address2 = $scope.SuggestedAddress.address2;
+                            $scope.address.city = $scope.SuggestedAddress.city;
+                            $scope.address.state = $scope.SuggestedAddress.state;
+                            $scope.address.zip = $scope.SuggestedAddress.zip;
                         }
                         if ($scope.addressSource === 'override') {
                             //just leave the values on $scope.address
