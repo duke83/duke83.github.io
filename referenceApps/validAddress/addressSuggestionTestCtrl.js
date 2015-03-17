@@ -1,7 +1,7 @@
 var app = angular.module('app', []);
 
 
-app.controller('validAddressTestCtrl', ['$scope', function ($scope) {
+app.controller('addressSuggestionTestCtrl', ['$scope', function ($scope) {
 
     $scope.currentindex = 0;
     $scope.testResult="";

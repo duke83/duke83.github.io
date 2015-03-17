@@ -1,14 +1,15 @@
 (function () {
     'use strict';
     angular.module('app')
-        .directive('addressSuggestion', function ($rootScope, serverApi, $q) {
+        .directive('addressSuggestion', function ($rootScope, $http,webConfig, $q) {
             return {
                 restrict: 'E',
                 scope: {
                     address: "=" // this is the address object from parent
                 },
 
-                templateUrl: "ValidAddressDirective.html",
+                templateUrl: "addressSuggestionDirective.html",
+                //templateUrl: "/partials/address-suggestion-details",
                 controller: function ($scope, $q) {
 
 
@@ -18,7 +19,7 @@
 
                     // The promise is resolved if the server returns isValid
                     // OR if the user has expressed approval to override server validation.
-                    $scope.addressidentifier=$scope.$id;
+                    $scope.addressidentifier = $scope.$id;
                     $scope.SuggestedAddress = {};
 
                     // THIS PROMISE WILL BE RESOLVED WHEN
@@ -38,51 +39,62 @@
 
 
 
-                    //THIS IS CALLED WHEN USER CLICKS OK BUTTON
+                    //USER CLICKS OK BUTTON
                     $scope.setUserInput = function () {
                         //user must have selected a radio button
-                        if($scope.addressSource=="suggested" | $scope.addressSource=="override"  ) {
+                        if ($scope.addressSource == "suggested" | $scope.addressSource == "override") {
+
                             //HIDE DIRECTIVE UI
                             $scope.ParentAddressFailsValidation = false;
                             console.log('setting user input.  about to resolve hasApproval_deferred');
-                            hasApproval_deferred.resolve({hasApproval: true, address:$scope.address});
+                            hasApproval_deferred.resolve({ hasApproval: true, address: $scope.address });
                         }
                     }
 
 
+
+                    function validateShippingAddress(addressDto) {
+                        var url = webConfig.digOpsApiUrl + '/AutoOrderManager/ValidateShippingAddress';
+                        var url = 'serverValidateShippingAddressFake.json'
+                        return $http.post(url, addressDto);
+                        return
+                    }
+
                     function checkServer() {
+
 
                         //ok, so we are assuming the spelling on $scope.address properties is a certain way.  This is a point to document.
                         var remappedDto = {
                             AddressLine1: $scope.address.address1,
                             AddressLine2: $scope.address.address2,
                             City: $scope.address.city,
-                            CountryCode: $scope.address.country,
+                            CountryCode: 'US',//$scope.address.country,
                             Territory: $scope.address.state,
                             PostalCode: $scope.address.zip
                         };
 
-                        serverApi.validateShippingAddress(remappedDto) //
+                        validateShippingAddress(remappedDto) //
                             .then(function (data) {
                                 console.log('serverApi returns to .then ', data);
+                                var objReturned = data.data;
 
                                 //show UI if original address is not valid
-                                if (!data.isValid) {
+                                if (!objReturned.isValid) {
                                     $scope.ParentAddressFailsValidation = true;
 
                                     //serverApi may not always return a suggested address
-                                    if(data.autoOrderReturnAddressDto) {
-                                        handleSuggestedAddress(data.autoOrderReturnAddressDto);
+                                    if (objReturned.autoOrderReturnAddressDto) {
+                                        handleSuggestedAddress(objReturned.autoOrderReturnAddressDto);
 
                                     }
                                     //then, only allow address resolution when user clicks OK
                                 }
 
                                 //the original address IS valid
-                                else{
+                                else {
                                     $scope.ParentAddressFailsValidation = false;
                                     $scope.SuggestedAddress = false;
-                                    hasApproval_deferred.resolve({isValid:true});
+                                    hasApproval_deferred.resolve({ isValid: true });
                                 }
                             })
                             .catch(
@@ -91,14 +103,15 @@
                             })
                     }
 
-                    function handleSuggestedAddress(suggestedAdress){
-                            $scope.SuggestedAddress = {
-                                "address1": suggestedAdress.address1,
-                                "address2": suggestedAdress.address2,
-                                "city": suggestedAdress.city,
-                                "state": suggestedAdress.state,
-                                "zip": suggestedAdress.zip
-                        }}
+                    function handleSuggestedAddress(suggestedAdress) {
+                        $scope.SuggestedAddress = {
+                            "address1": suggestedAdress.address1,
+                            "address2": suggestedAdress.address2,
+                            "city": suggestedAdress.city,
+                            "state": suggestedAdress.state,
+                            "zip": suggestedAdress.zip
+                        }
+                    }
 
 
 
@@ -106,7 +119,7 @@
                     $scope.selectAddress = function () {
                         // $scope.addressSource is 'suggested' | 'override'
                         if ($scope.addressSource === 'suggested') {
-                            $scope.address.address1 = SuggestedAddress.address1;
+                            $scope.address.address1 = $scope.SuggestedAddress.address1;
                             $scope.address.address2 = $scope.SuggestedAddress.address2;
                             $scope.address.city = $scope.SuggestedAddress.city;
                             $scope.address.state = $scope.SuggestedAddress.state;

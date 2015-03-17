@@ -122,7 +122,7 @@
 <body data-ng-app="app" style="padding: 2rem;">
 <a href="http://duke83.github.io/referenceApps/validAddress/index.html">http://duke83.github.io/referenceApps/addressSuggestion/index.html</a>
 
-<div data-ng-controller="validAddressTestCtrl" class="test-scenario">
+<div data-ng-controller="addressSuggestionTestCtrl" class="test-scenario">
 
     <span class="test-name">
         check address suggestion for: <input type="text" data-ng-model="currentindex" style="width:50px">
@@ -155,9 +155,12 @@
 
 <!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
 <script src="app.js"></script>
-<script src="validAddressTestCtrl.js"></script>
+<script src="addressSuggestionTestCtrl.js"></script>
+
+<script src="webConfigFake.js"></script>
 <script src="addressSuggestionDirective.js"></script>
 <script src="serverApiFake.js"></script>
+
 
 
 </body>
