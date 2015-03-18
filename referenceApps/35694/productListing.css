@@ -1,0 +1,49 @@
+.product-listing-item{
+    margin-top: 40px;
+    border:1px solid green;
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+
+.product-details-image{
+    height:110px;
+    width:80px;
+    background-color: pink;
+}
+.product-details-grouping{
+    /*background: pink;*/
+}
+
+.product-short-description{
+    color:green;
+}
+
+.product-full-description{
+    display:block;
+    font-size: smaller;
+}
+
+.product-unit-measurement{
+    top:20px;
+    display:block;
+    font-size: smaller;
+}
+.price-line{
+    position: inherit;
+    display: block;
+    top:20px;
+}
+
+.charge-line{
+    margin-left: 15px;
+    margin-right: 15px;
+    display: block;
+}
+.charges-container-value{
+    float:right;
+    display:inline-block;
+}
+
+.product-listing-button{
+    top:20px;
+}

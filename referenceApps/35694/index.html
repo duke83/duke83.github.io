@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="productListing.css">
+</head>
+<body>
+<div class="columns medium-12 ">
+
+    <div class="product-listing-item columns medium-4">
+        <span class="product-info-container row">
+            <span class="product-details-image columns medium-4">
+            <a href="./products/@product.value.Product.Name">
+                <img src="" style="width:60px; height:100px; background: lightgrey"/>
+            </a>
+            </span>
+            <span class="product-details-grouping columns medium-8">
+                <span class="product-short-description">NeriumAD</span>
+
+                <span class="product-full-description">Age-Defying Treatment</span>
+
+                <span class="product-unit-measurement">30 ml/1fl.oz</span>
+
+                <span class="price-line">
+                    <span class="charges-container-label">Qty: 1</span>
+                    <span class="charges-container-value">$495.00</span>
+                </span>
+
+
+            </span>
+
+        </span>
+        <span class="row">
+            <hr/>
+        <span class="charges-container">
+
+            <span class="charge-line">
+                <span class="charges-container-label">Subtotal</span>
+                <span class="charges-container-value">$495.00</span>
+            </span>
+
+            <span class="charge-line">
+                <span class="charges-container-label">Shipping Costs</span>
+                <span class="charges-container-value">$0.00</span>
+            </span>
+
+            <span class="charge-line">
+                <span class="charges-container-label">Sales Tax</span>
+                <span class="charges-container-value">$0.00</span>
+            </span>
+
+            <span class="charge-line">
+                <span class="charges-container-label">Promo Code</span>
+                <span class="charges-container-value">xxxx</span>
+            </span>
+
+        </span>
+            <hr/>
+        <span class="charges-container">
+                 <span class="charge-line">
+                <span class="charges-container-label">Total</span>
+                <span class="charges-container-value">$495.00</span>
+            </span>
+
+</span>
+                <button class="radius product-listing-button" data-add-to-prospect-basket
+                        data-product-id="@product.value.Product.ExternalID">
+                    @isInBasketbuttonState><i class="fa fa-shopping-cart"></i>
+                </button>
+
+        </span>
+
+        </span>
+    </div>
+
+</div>
+</body>
+</html>
