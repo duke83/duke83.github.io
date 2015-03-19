@@ -27,13 +27,17 @@
                 state: "CA",
                 zip: "92054"
             };
+
+            $scope.getShipToAddress=angular.bind(self,function(){
+                return self.ShipToAddress;
+            })
         }]);
     }());
 
     (function () {
         angular.module('app').controller('shadowShippingCtrl', ['$scope', function ($scope) {
-            //var shippingCtrlScope = angular.element('[ng-controller=ShippingCheckoutCtrl]').scope();
-           //console.log('shippingCtrlScope', shippingCtrlScope);
+            var shippingCtrlScope = angular.element('[ng-controller=ShippingCheckoutCtrl]').scope();
+           console.log('shippingCtrlScope', shippingCtrlScope);
             //$scope.address = shippingCtrlScope.ShipToAddress;
         }]);
     }());
@@ -45,8 +49,11 @@
         This example shows two controllers, where
         <ul>
             <li>The first controller DOES use the 'controller as' syntax.</li>
-            <li>The second controller is broken.</li>
+            <li>The second controller is broken.<br/>
+            <code>var shippingCtrlScope = angular.element('[ng-controller=ShippingCheckoutCtrl]').scope(); // doesn't work</code>
+            </li>
             <li>See <a href="http://toddmotto.com/digging-into-angulars-controller-as-syntax/">digging-into-angulars-controller-as-syntax</a> for details on 'controller as' syntax.</li>
+            <li>I'm thinking the best way to access that address info is through the chekoutService.</li>
         </ul>
 
     </blockquote>
