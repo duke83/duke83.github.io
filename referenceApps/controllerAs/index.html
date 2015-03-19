@@ -18,7 +18,9 @@
 
     (function () {
         angular.module('app').controller('ShippingCheckoutCtrl', ['$scope', function ($scope) {
-            $scope.ShipToAddress = {
+            var self=this;
+
+            self.ShipToAddress = {
                 address1: "123 fireside",
                 address2: "",
                 city: "oceanside",
@@ -30,9 +32,9 @@
 
     (function () {
         angular.module('app').controller('shadowShippingCtrl', ['$scope', function ($scope) {
-            var shippingCtrlScope = angular.element('[ng-controller=ShippingCheckoutCtrl]').scope();
-           console.log('shippingCtrlScope', shippingCtrlScope);
-            $scope.address = shippingCtrlScope.ShipToAddress;
+            //var shippingCtrlScope = angular.element('[ng-controller=ShippingCheckoutCtrl]').scope();
+           //console.log('shippingCtrlScope', shippingCtrlScope);
+            //$scope.address = shippingCtrlScope.ShipToAddress;
         }]);
     }());
 
@@ -48,11 +50,11 @@
 
     </blockquote>
 
-    <div ng-controller="ShippingCheckoutCtrl"
+    <div ng-controller="ShippingCheckoutCtrl as shippingCtrl"
          style="border:1px solid darkgray; margin:2rem;padding: 1rem">
         <p>ShippingCheckoutCtrl</p>
-        {{ShipToAddress}}
-        <input type="text" ng-model="ShipToAddress.address1"/>
+        {{shippingCtrl.ShipToAddress}}
+        <input type="text" ng-model="shippingCtrl.ShipToAddress.address1"/>
     </div>
 
     <div ng-controller="shadowShippingCtrl" style="border:1px solid darkgray; margin:2rem;padding: 1rem">
