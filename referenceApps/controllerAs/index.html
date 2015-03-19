@@ -41,21 +41,22 @@
     <blockquote>
         This example shows two controllers, where
         <ul>
-            <li>the first controller DOES NOT use the "controller as" syntax</li>
-            <li>the second has a reference to the first's scope.</li>
+            <li>The first controller DOES NOT use the 'controller as' syntax.</li>
+            <li>The second has a reference to the first's scope.</li>
+            <li>See <a href="http://toddmotto.com/digging-into-angulars-controller-as-syntax/">digging-into-angulars-controller-as-syntax</a> for details on 'controller as' syntax.</li>
         </ul>
 
     </blockquote>
 
     <div ng-controller="ShippingCheckoutCtrl"
          style="border:1px solid darkgray; margin:2rem;padding: 1rem">
-        <p>shippingCtrl</p>
+        <p>ShippingCheckoutCtrl</p>
         {{ShipToAddress}}
         <input type="text" ng-model="ShipToAddress.address1"/>
     </div>
 
     <div ng-controller="shadowShippingCtrl" style="border:1px solid darkgray; margin:2rem;padding: 1rem">
-        <p>shadowShippingCtrl</p>{{2+2}}
+        <p>shadowShippingCtrl</p>
         {{address}}
     </div>
 </div>
