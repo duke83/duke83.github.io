@@ -12,7 +12,7 @@
 <style>
     .address-suggestion-message-container {
         border: 1px solid #41a2ff;
-        width: 600px;
+        /*width: 700px;*/
         margin: 1rem;
         padding: 1rem;
         color: #41a2ff;
@@ -30,6 +30,7 @@
 
     .address-suggestion-message-top {
         display: block;
+        margin-bottom: 1rem;;
     }
 
     .address-suggestion-button-container {
@@ -41,10 +42,12 @@
     }
 
     .address-suggestion-cancel-button {
-        left: 1rem;
+        /*left: 1rem;*/
     }
 </style>
 
+
+<h2>3 message boxes below</h2>
 <div class="address-suggestion-message-container">
     <span class="address-suggestion-message-center">Checking address....</span>
 </div>
@@ -52,8 +55,8 @@
 <div class="address-suggestion-message-container">
     <span class="address-suggestion-message-top">We found an address that may work better. Which one do you want to use?</span>
     <span class="address-suggestion-message-left">
-        <input type="radio" name="rad" id="rad1"><label for="rad1">Suggested: 2903 Crystal Way,this is my country Grand Pairie, TX  75052</label>
-        <input type="radio" name="rad" id="rad2"><label for="rad2">Suggested: 2903 Xrystal Way, Grand Pairie, TX  75052</label>
+        <input type="radio" name="rad" id="rad1"><label for="rad1">Suggested: 2903 Crystal Way,this is my country Grand Pairie, TX  75052</label><br/>
+        <input type="radio" name="rad" id="rad2"><label for="rad2">Original: 2903 Xrystal Way, Grand Pairie, TX  75052</label>
     </span>
     <span class="address-suggestion-button-container">
         <button class="address-suggestion-ok-button">OK</button>
