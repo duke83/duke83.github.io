@@ -1,0 +1,44 @@
+.address-suggestion-container{
+    border:1px solid silver;
+    margin:1rem;
+}
+.address-suggestion-suggested-address-container{
+    border-bottom: 1px solid silver;
+}
+
+.address-suggestion-label{
+    font-size: smaller;
+    display: block;
+    margin:1rem;
+}
+
+.address-suggestion-suggested-address{
+
+    margin-top:.5rem;
+    margin-bottom:.5rem;
+    padding-left:1rem;
+    display: block;
+}
+
+
+
+.address-suggestion-address-line{
+    display: block;
+}
+
+.address-suggestion-radios-container{
+    display: inline-block;
+    padding-bottom:.85rem;
+
+}
+
+.address-suggestion-radio-container{
+    display: block;
+    padding-left:1rem;
+    padding-top:.5rem;
+
+}
+
+.address-suggestion-button{
+    margin:1rem;
+}

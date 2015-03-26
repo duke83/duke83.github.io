@@ -1,33 +1,44 @@
-<div ng-show="ParentAddressFailsValidation">
+<div ng-show="ParentAddressFailsValidation" class="address-suggestion-container">
 
-    <div ng-show="SuggestedAddress">
-        <hr>
+    <div class="address-suggestion-suggested-address-container" ng-show="SuggestedAddress">
 
+        <span class="address-suggestion-label">Suggested Address:</span>
+
+
+        <span class="address-suggestion-suggested-address">
+            <span class="address-suggestion-address-line">
+                <span class="ng-binding" data-ng-bind="SuggestedAddress.address1"></span>
+            </span>
+
+            <span class="address-suggestion-address-line">
+                <span class="ng-binding" data-ng-bind="SuggestedAddress.address2"></span>
+            </span>
+            <span class="address-suggestion-address-line">
+                <span class="ng-binding" data-ng-bind="SuggestedAddress.city"></span>
+                ,
+                <span class="ng-binding" data-ng-bind="SuggestedAddress.state"></span>
+                <span class="ng-binding" data-ng-bind="SuggestedAddress.zip"></span>
+            </span>
+        </span>
+
+    </div>
+    <span class="address-suggestion-radios-container">
+        <span class="address-suggestion-radio-container">
         <input id="addressSourceSuggested{{addressidentifier}}" type="radio" ng-model="addressSource"
                name="addressSource" value="suggested" data-ng-change="selectAddress('suggested')">
-        <label for="addressSourceSuggested{{addressidentifier}}">Is this the address you mean?</label>
 
-        <div class="address-line">
-            <span class="ng-binding" data-ng-bind="SuggestedAddress.address1"></span>
-        </div>
+        <label for="addressSourceSuggested{{addressidentifier}}">Use the suggested address</label>
 
-        <div class="address-line">
-            <span class="ng-binding" data-ng-bind="SuggestedAddress.address2"></span>
-        </div>
-        <div class="address-line">
-            <span class="ng-binding" data-ng-bind="SuggestedAddress.city"></span>
-            ,
-            <span class="ng-binding" data-ng-bind="SuggestedAddress.state"></span>
-            <span class="ng-binding" data-ng-bind="SuggestedAddress.zip"></span>
-        </div>
-    </div>
-
-    <hr>
-
-    <input id="addressSourceOverride{{addressidentifier}}" type="radio" ng-model="addressSource" name="addressSource"
-           value="override" data-ng-change="selectAddress('override')">
-    <label for="addressSourceOverride{{addressidentifier}}">I am sure I want to use this address</label>
+        </span>
+        <span class="address-suggestion-radio-container">
+        <input id="addressSourceOverride{{addressidentifier}}" type="radio" ng-model="addressSource"
+               name="addressSource"
+               value="override" data-ng-change="selectAddress('override')">
+        <label for="addressSourceOverride{{addressidentifier}}">Use the current address</label>
+        </span>
+    </span>
+    <span class="address-suggestion-button">
     <button ng-click="setUserInput()">ok</button>
-
+</span>
 
 </div>

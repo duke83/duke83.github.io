@@ -35,15 +35,29 @@
     }());
 
     (function () {
-        angular.module('app').controller('shadowShippingCtrl', ['$scope', function ($scope) {
+        angular.module('app').controller('shadowShippingCtrl', ['$scope','$timeout', function ($scope,$timeout) {
             var shippingCtrlScope = angular.element('[ng-controller=ShippingCheckoutCtrl]').scope();
+            $scope.testval="xxx";
+            $scope.init=function(){
+                $scope.testval=angular.element('#test1').val();
+                console.log('$scope.testval',$scope.testval);
+            }()
+
+
            console.log('shippingCtrlScope', shippingCtrlScope);
             //$scope.address = shippingCtrlScope.ShipToAddress;
+            $timeout(function(){
+                $scope.$apply();
+            },1234)
+
+
         }]);
     }());
 
 </script>
 <div ng-app="app">
+
+
     <a href="http://duke83.github.io/referenceApps/controllerAs/">http://duke83.github.io/referenceApps/controllerAs/</a>
     <blockquote>
         This example shows two controllers, where
@@ -61,12 +75,14 @@
     <div ng-controller="ShippingCheckoutCtrl as shippingCtrl"
          style="border:1px solid darkgray; margin:2rem;padding: 1rem">
         <p>ShippingCheckoutCtrl</p>
+
         {{shippingCtrl.ShipToAddress}}
         <input type="text" ng-model="shippingCtrl.ShipToAddress.address1"/>
     </div>
 
     <div ng-controller="shadowShippingCtrl" style="border:1px solid darkgray; margin:2rem;padding: 1rem">
         <p>shadowShippingCtrl</p>
+        <input type="text" id="test1" value="hello"/><span ng-bind="testval"></span>the value is: {{testval}}
         {{address}}
     </div>
 </div>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="main_bo_3_26_15.css">
+</head>
+<body>
+<img src="Iteration_12_Address_Enhancements(4).jpg" style="width:600px" alt=""/>
+<br>
+<img src="Iteration_12_Address_Enhancements(3).jpg" style="width:600px" alt=""/>
+<style>
+    .address-suggestion-message-container {
+        border: 1px solid #41a2ff;
+        width: 600px;
+        margin: 1rem;
+        padding: 1rem;
+        color: #41a2ff;
+    }
+
+    .address-suggestion-message-center {
+        text-align: center;
+        display: block;
+    }
+
+    .address-suggestion-message-left {
+        display: inline-block;
+        width: 60%;
+    }
+
+    .address-suggestion-message-top {
+        display: block;
+    }
+
+    .address-suggestion-button-container {
+        display: inline-block;
+    }
+
+    .address-suggestion-ok-button {
+        /*margin-right: 1rem;;*/
+    }
+
+    .address-suggestion-cancel-button {
+        left: 1rem;
+    }
+</style>
+
+<div class="address-suggestion-message-container">
+    <span class="address-suggestion-message-center">Checking address....</span>
+</div>
+
+<div class="address-suggestion-message-container">
+    <span class="address-suggestion-message-top">We found an address that may work better. Which one do you want to use?</span>
+    <span class="address-suggestion-message-left">
+        <input type="radio" name="rad" id="rad1"><label for="rad1">Suggested: 2903 Crystal Way,this is my country Grand Pairie, TX  75052</label>
+        <input type="radio" name="rad" id="rad2"><label for="rad2">Suggested: 2903 Xrystal Way, Grand Pairie, TX  75052</label>
+    </span>
+    <span class="address-suggestion-button-container">
+        <button class="address-suggestion-ok-button">OK</button>
+        <button class="address-suggestion-cancel-button">Cancel</button>
+    </span>
+</div>
+
+<div class="address-suggestion-message-container">
+    <span class="address-suggestion-message-left">We were unable to validate the address you entered.  Are you certain this is correct?</span>
+
+    <span class="address-suggestion-button-container">
+        <button class="address-suggestion-ok-button">OK</button>
+        <button class="address-suggestion-cancel-button">Cancel</button>
+    </span>
+</div>
+</body>
+</html>
