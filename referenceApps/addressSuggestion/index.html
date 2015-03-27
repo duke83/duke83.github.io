@@ -7,15 +7,28 @@
 
     <link rel="stylesheet" href="artifacts/main_bo_3_26_15.css">
     <link rel="stylesheet" href="style.css"/>
-    </head>
+</head>
 <body data-ng-app="app" style="padding: 2rem;">
+<style>
+    .testContainer {
+        border: 1px solid gray;
+        marginp-top: 30px;
+        padding: 20px;
+    }
 
+    .mock-service-return {
+        font-weight: 100;
+        font-size: smaller;
+        margin-left: .5rem;
+        word-wrap: break-word;
+    }
+</style>
+<div class="testContainer">
+    <h2>Case1: Invalid Address, Suggestion Provided</h2>
+    <h5>Mock service will return:<span class="mock-service-return">{isValid: false, autoOrderReturnAddressDto: {address1: "580 Garner Rd",address2: "",city: "CJ",state: "OR", zip: "92232"}</span>
+    </h5>
 
-<h2>Case1: Invalid Address, Suggestion Provided</h2>
-<h5>Mock service will return</h5>
-<div data-ng-controller="testCase1Ctrl" >
-
-    <button data-ng-click="save()">Save</button>
+    <div data-ng-controller="testCase1Ctrl">
 
         <input ng-model="address.firstName" placeholder="First Name" class="app-input">
         <input ng-model="address.lastName" placeholder="Last Name" class="app-input">
@@ -27,18 +40,70 @@
         <input ng-model="address.city" placeholder="city" class="app-input">
         <input ng-model="address.state" placeholder="state" class="app-input">
         <input ng-model="address.zip" placeholder="zip" class="app-input">
-        <input ng-model="address.instructions" placeholder="Instructions" class="app-input">
 
-        <div style="font-size:smaller; color:gray">{{address}}</div>
+        <br/><br/>
+        <button data-ng-click="save()">Save</button>
+
+        <h5>This is what gets passed on to further processing:</h5>
+        <span class="mock-service-return">{{resolution}}</span>
+
+    </div>
+</div>
 
 
+<div class="testContainer">
+<h2>Case2: Invalid Address, No Suggestion Provided</h2>
+    <h5>Mock service will return:<span class="mock-service-return">{isValid: false}</span>
+    </h5>
+    <div data-ng-controller="testCase2Ctrl">
+
+        <input ng-model="address.firstName" placeholder="First Name" class="app-input">
+        <input ng-model="address.lastName" placeholder="Last Name" class="app-input">
+
+        <address-suggestion ng-attr-address="address"></address-suggestion>
+
+        <input ng-model="address.address1" placeholder="address1" class="app-input">
+        <input ng-model="address.address2" placeholder="address2" class="app-input">
+        <input ng-model="address.city" placeholder="city" class="app-input">
+        <input ng-model="address.state" placeholder="state" class="app-input">
+        <input ng-model="address.zip" placeholder="zip" class="app-input">
+
+        <br/><br/>
+        <button data-ng-click="save()">Save</button>
+
+        <h5>This is what gets passed on to further processing:</h5>
+        <span class="mock-service-return">{{resolution}}</span>
+
+    </div>
 
 </div>
 
-<h2>Case2: Invalid Address, No Suggestion Provided</h2>
-
+<div class="testContainer">
 <h2>Case3: Valid Address</h2>
+    <h5>Mock service will return:<span class="mock-service-return">{isValid: true}</span>
+    </h5>
+    <div data-ng-controller="testCase3Ctrl">
 
+        <input ng-model="address.firstName" placeholder="First Name" class="app-input">
+        <input ng-model="address.lastName" placeholder="Last Name" class="app-input">
+
+        <address-suggestion ng-attr-address="address"></address-suggestion>
+
+        <input ng-model="address.address1" placeholder="address1" class="app-input">
+        <input ng-model="address.address2" placeholder="address2" class="app-input">
+        <input ng-model="address.city" placeholder="city" class="app-input">
+        <input ng-model="address.state" placeholder="state" class="app-input">
+        <input ng-model="address.zip" placeholder="zip" class="app-input">
+
+        <br/><br/>
+        <button data-ng-click="save()">Save</button>
+
+        <h5>This is what gets passed on to further processing:</h5>
+        <span class="mock-service-return">{{resolution}}</span>
+
+    </div>
+
+</div>
 <!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
 <script src="vendor_local/jquery.min.js"></script>
 <script src="vendor_local/angular.js"></script>

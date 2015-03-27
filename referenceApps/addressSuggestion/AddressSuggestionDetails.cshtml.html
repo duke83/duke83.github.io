@@ -3,26 +3,36 @@
         <span class="address-suggestion-message-center">Checking address....</span>
     </div>
 
-    <div class="address-suggestion-message-container" ng-show="address.watingForUserInputChoice">
+    <div class="address-suggestion-message-container" ng-show="address.waitingForUserInputChoice">
         <span class="address-suggestion-message-top">We found an address that may work better. Which one do you want to use?</span>
     <span class="address-suggestion-message-left">
-        <input type="radio" name="rad" id="rad1"><label for="rad1">Suggested: 2903 Crystal Way,this is my country Grand
-        Pairie, TX 75052</label><br/>
-        <input type="radio" name="rad" id="rad2"><label for="rad2">Original: 2903 Xrystal Way, Grand Pairie, TX
-        75052</label>
+        <input type="radio" name="rad" ng-model="addressSource" value="suggested" id="rad1" ><label for="rad1">Suggested:
+        <span ng-bind="suggestedAddress.address1"></span>
+        <span ng-bind="suggestedAddress.address2"></span>
+        <span ng-bind="suggestedAddress.city"></span>
+        <span ng-bind="suggestedAddress.state"></span>
+        <span ng-bind="suggestedAddress.zip"></span>
+    </label><br/>
+        <input type="radio" name="rad" ng-model="addressSource" value="original" id="rad2"><label for="rad2">Original:
+        <span ng-bind="originalAddress.address1"></span>
+        <span ng-bind="originalAddress.address2"></span>
+        <span ng-bind="originalAddress.city"></span>
+        <span ng-bind="originalAddress.state"></span>
+        <span ng-bind="originalAddress.zip"></span>
+    </label>
     </span>
     <span class="address-suggestion-button-container">
-        <button class="address-suggestion-ok-button">OK</button>
-        <button class="address-suggestion-cancel-button">Cancel</button>
+        <button class="address-suggestion-ok-button" ng-click="clickOk()">OK</button>
+        <button class="address-suggestion-cancel-button" ng-click="cancel()">Cancel</button>
     </span>
     </div>
 
-    <div class="address-suggestion-message-container" ng-show="address.watingForUserInputSingle">
+    <div class="address-suggestion-message-container" ng-show="address.waitingForUserInputSingle">
         <span class="address-suggestion-message-left">We were unable to validate the address you entered.  Are you certain this is correct?</span>
 
     <span class="address-suggestion-button-container">
-        <button class="address-suggestion-ok-button">OK</button>
-        <button class="address-suggestion-cancel-button">Cancel</button>
+        <button class="address-suggestion-ok-button" ng-click="clickOk">OK</button>
+        <button class="address-suggestion-cancel-button" ng-click="cancel()">Cancel</button>
     </span>
     </div>
 </div>

@@ -15,7 +15,7 @@ app.controller('testCase1Ctrl', ['$scope', function ($scope) {
         $scope.address.hasApproval()
             .then(function(data){
                 console.log('the resolution of approval is:', data)
-                $scope.testResult=data;
+                $scope.resolution=data;
             })
     }
 
