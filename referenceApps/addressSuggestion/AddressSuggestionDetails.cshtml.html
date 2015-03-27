@@ -1,0 +1,28 @@
+<div>
+    <div class="address-suggestion-message-container" ng-show="address.loading">
+        <span class="address-suggestion-message-center">Checking address....</span>
+    </div>
+
+    <div class="address-suggestion-message-container" ng-show="address.watingForUserInputChoice">
+        <span class="address-suggestion-message-top">We found an address that may work better. Which one do you want to use?</span>
+    <span class="address-suggestion-message-left">
+        <input type="radio" name="rad" id="rad1"><label for="rad1">Suggested: 2903 Crystal Way,this is my country Grand
+        Pairie, TX 75052</label><br/>
+        <input type="radio" name="rad" id="rad2"><label for="rad2">Original: 2903 Xrystal Way, Grand Pairie, TX
+        75052</label>
+    </span>
+    <span class="address-suggestion-button-container">
+        <button class="address-suggestion-ok-button">OK</button>
+        <button class="address-suggestion-cancel-button">Cancel</button>
+    </span>
+    </div>
+
+    <div class="address-suggestion-message-container" ng-show="address.watingForUserInputSingle">
+        <span class="address-suggestion-message-left">We were unable to validate the address you entered.  Are you certain this is correct?</span>
+
+    <span class="address-suggestion-button-container">
+        <button class="address-suggestion-ok-button">OK</button>
+        <button class="address-suggestion-cancel-button">Cancel</button>
+    </span>
+    </div>
+</div>

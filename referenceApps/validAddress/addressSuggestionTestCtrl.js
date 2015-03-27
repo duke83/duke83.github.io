@@ -16,7 +16,6 @@ app.controller('addressSuggestionTestCtrl', ['$scope', function ($scope) {
                 })
             }
         }
-
     };
 
     $scope.addresses = [{

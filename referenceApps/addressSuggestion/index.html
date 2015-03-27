@@ -4,39 +4,40 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>addressSuggestion Directive Test</title>
-    <link rel="stylesheet" href="style.css"/>
 
+    <link rel="stylesheet" href="artifacts/main_bo_3_26_15.css">
+    <link rel="stylesheet" href="style.css"/>
     </head>
 <body data-ng-app="app" style="padding: 2rem;">
-<a href="http://duke83.github.io/referenceApps/validAddress/index.html">http://duke83.github.io/referenceApps/addressSuggestion/index.html</a>
-
-<div data-ng-controller="addressSuggestionTestCtrl" class="test-scenario">
-
-    <span class="test-name">
-        check address suggestion for: <input type="text" data-ng-model="currentindex" style="width:50px">
-    <button data-ng-click="runTest()">runTest</button>{{testResult}}
-    </span>
 
 
-    <div data-ng-repeat="addr in addresses" style="margin:30px;">
-        <input ng-model="addr.firstName" placeholder="First Name" class="app-input">
-        <input ng-model="addr.lastName" placeholder="Last Name" class="app-input">
+<h2>Case1: Invalid Address, Suggestion Provided</h2>
+<h5>Mock service will return</h5>
+<div data-ng-controller="testCase1Ctrl" >
 
-        <address-suggestion ng-attr-address="addr"></address-suggestion>
+    <button data-ng-click="save()">Save</button>
 
-        <input ng-model="addr.address1" placeholder="address1" class="app-input">
-        <input ng-model="addr.address2" placeholder="address2" class="app-input">
-        <input ng-model="addr.city" placeholder="city" class="app-input">
-        <input ng-model="addr.state" placeholder="state" class="app-input">
-        <input ng-model="addr.zip" placeholder="zip" class="app-input">
-        <input ng-model="addr.instructions" placeholder="Instructions" class="app-input">
+        <input ng-model="address.firstName" placeholder="First Name" class="app-input">
+        <input ng-model="address.lastName" placeholder="Last Name" class="app-input">
 
-        <div style="font-size:smaller; color:gray">{{addr}}</div>
-    </div>
+        <address-suggestion ng-attr-address="address"></address-suggestion>
+
+        <input ng-model="address.address1" placeholder="address1" class="app-input">
+        <input ng-model="address.address2" placeholder="address2" class="app-input">
+        <input ng-model="address.city" placeholder="city" class="app-input">
+        <input ng-model="address.state" placeholder="state" class="app-input">
+        <input ng-model="address.zip" placeholder="zip" class="app-input">
+        <input ng-model="address.instructions" placeholder="Instructions" class="app-input">
+
+        <div style="font-size:smaller; color:gray">{{address}}</div>
+
 
 
 </div>
 
+<h2>Case2: Invalid Address, No Suggestion Provided</h2>
+
+<h2>Case3: Valid Address</h2>
 
 <!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
 <script src="vendor_local/jquery.min.js"></script>
@@ -46,9 +47,8 @@
 
 <!-- APPLICATION SCRIPTS START -->
 <script src="app.js"></script>
-<script src="addressSuggestionTestCtrl.js"></script>
 <script src="webConfigFake.js"></script>
-<script src="addressSuggestionDirective.js"></script>
+<script src="addressSuggestion.js"></script>
 <script src="serverApiFake.js"></script>
 <!-- APPLICATION SCRIPTS START -->
 
