@@ -1,9 +1,18 @@
 .address-suggestion-message-container {
     border: 1px solid #41a2ff;
-    /*width: 700px;*/
-    margin: 1rem;
+    margin: 1.5rem;
     padding: 1rem;
-    color: #41a2ff;
+    display: inline-block;
+}
+
+.address-suggestion-type {
+    margin-right: 1rem;
+    color: silver;
+    position: relative;
+}
+
+.address-suggestion-address-label {
+    display: block;
 }
 
 .address-suggestion-message-center {
@@ -26,9 +35,27 @@
 }
 
 .address-suggestion-ok-button {
-    /*margin-right: 1rem;;*/
+    margin: 10px 20px;
 }
 
 .address-suggestion-cancel-button {
     /*left: 1rem;*/
+}
+
+.address-suggestion-table {
+    border: none;
+    margin-bottom: 0;
+}
+
+.address-suggestion-table-row {
+    border: none;
+    background: white !important;
+}
+
+.address-suggestion-table-cell {
+    vertical-align: top;
+}
+
+.address-suggestion-radio {
+    margin: 0 !important;
 }

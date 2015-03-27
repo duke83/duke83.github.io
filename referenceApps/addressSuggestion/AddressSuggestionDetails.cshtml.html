@@ -4,27 +4,48 @@
     </div>
 
     <div class="address-suggestion-message-container" ng-show="address.waitingForUserInputChoice">
-        <span class="address-suggestion-message-top">We found an address that may work better. Which one do you want to use?</span>
-    <span class="address-suggestion-message-left">
-        <input type="radio" name="rad{{addressidentifier}}" ng-model="addressSource" checked="checked" value="suggested" id="rad1{{addressidentifier}}" ><label for="rad1{{addressidentifier}}">Suggested:
-        <span ng-bind="suggestedAddress.address1"></span>
-        <span ng-bind="suggestedAddress.address2"></span>
-        <span ng-bind="suggestedAddress.city"></span>
-        <span ng-bind="suggestedAddress.state"></span>
-        <span ng-bind="suggestedAddress.zip"></span>
-    </label><br/>
-        <input type="radio" name="rad{{addressidentifier}}" ng-model="addressSource" value="original" id="rad2{{addressidentifier}}"><label for="rad2{{addressidentifier}}">Original:
-        <span ng-bind="originalAddress.address1"></span>
-        <span ng-bind="originalAddress.address2"></span>
-        <span ng-bind="originalAddress.city"></span>
-        <span ng-bind="originalAddress.state"></span>
-        <span ng-bind="originalAddress.zip"></span>
-    </label>
-    </span>
-    <span class="address-suggestion-button-container">
-        <button class="address-suggestion-ok-button" ng-click="clickOk()">OK</button>
-        <button class="address-suggestion-cancel-button" ng-click="cancel()">Cancel</button>
-    </span>
+        <span class="address-suggestion-message-top">We found an address that may work better. Which one would you like to use?</span>
+        <table class="address-suggestion-table">
+            <tr class="address-suggestion-table-row">
+                <td><input type="radio" name="rad{{addressidentifier}}" ng-model="addressSource" checked="checked"
+                           value="suggested" id="rad1{{addressidentifier}}" class="address-suggestion-radio">
+                </td>
+                <td>
+                    <label for="rad1{{addressidentifier}}"><span class="address-suggestion-type">Suggested:</span>
+                        <span class="address-suggestion-address-label">
+                            <span ng-bind="suggestedAddress.address1"></span>
+                            <span ng-bind="suggestedAddress.address2"></span>,
+                            <span ng-bind="suggestedAddress.city"></span>
+                            <span ng-bind="suggestedAddress.state"></span>
+                            <span ng-bind="suggestedAddress.zip"></span>
+                        </span>
+                    </label>
+                </td>
+                <td rowspan="2">
+                        <span class="address-suggestion-button-container">
+                             <button class="address-suggestion-ok-button" ng-click="clickOk()">OK</button>
+                             <button class="address-suggestion-cancel-button" ng-click="cancel()">Cancel</button>
+                        </span>
+                </td>
+            </tr>
+            <tr class="address-suggestion-table-row">
+                <td><input type="radio" name="rad{{addressidentifier}}" ng-model="addressSource" value="original"
+                           id="rad2{{addressidentifier}}" class="address-suggestion-radio"></td>
+                <td>
+                    <label for="rad2{{addressidentifier}}"><span class="address-suggestion-type">Original:</span>
+                            <span class="address-suggestion-address-label">
+                            <span ng-bind="originalAddress.address1"></span>
+                            <span ng-bind="originalAddress.address2"></span>,
+                            <span ng-bind="originalAddress.city"></span>
+                            <span ng-bind="originalAddress.state"></span>
+                            <span ng-bind="originalAddress.zip"></span>
+                        </span>
+                    </label>
+                </td>
+            </tr>
+
+            </tr></table>
+
     </div>
 
     <div class="address-suggestion-message-container" ng-show="address.waitingForUserInputSingle">
