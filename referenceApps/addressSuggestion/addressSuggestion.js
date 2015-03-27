@@ -71,25 +71,39 @@
                         $scope.address.loading = false;
                         $scope.address.waitingForUserInputChoice=false;
                         $scope.address.waitingForUserInputSingle=false;
+                        //hasApproval_deferred.reject({'reason':'user canceled'});
 
                     }
 
                     //USER CLICKS OK BUTTON
-                    $scope.clickOk = function () {
-                        if ($scope.addressSource == "original") {
-                            //original is already mapped to orginal, but we refill it anyway, just in case containing page forgot to disable address fields
+                    $scope.clickOk = function (manualAddressSource) {
+                        //IF THERE IS NO SUGGESTED ADDRESS THEN THERE IS NO TOGGLE BETWEEN ORIGINAL AND SUGGESTED.
+                        //THIS HAPPENS IN Case2: Invalid Address, No Suggestion Provided
+                        //IN THIS CASE USE THE manualAddressSource PARAMETER TO SPECIFY INTENT
+
+                        if(manualAddressSource=="original"){
                             $scope.address.address1=$scope.originalAddress.address1;
                             $scope.address.address2=$scope.originalAddress.address2;
                             $scope.address.city=$scope.originalAddress.city;
                             $scope.address.state=$scope.originalAddress.state;
                             $scope.address.zip=$scope.originalAddress.zip;
                         }
-                        if ($scope.addressSource == "suggested") {
-                            $scope.address.address1=$scope.suggestedAddress.address1;
-                            $scope.address.address2=$scope.suggestedAddress.address2;
-                            $scope.address.city=$scope.suggestedAddress.city;
-                            $scope.address.state=$scope.suggestedAddress.state;
-                            $scope.address.zip=$scope.suggestedAddress.zip;
+                        else {
+                            if ($scope.addressSource == "original") {
+                                //original is already mapped to orginal, but we refill it anyway, just in case containing page forgot to disable address fields
+                                $scope.address.address1 = $scope.originalAddress.address1;
+                                $scope.address.address2 = $scope.originalAddress.address2;
+                                $scope.address.city = $scope.originalAddress.city;
+                                $scope.address.state = $scope.originalAddress.state;
+                                $scope.address.zip = $scope.originalAddress.zip;
+                            }
+                            if ($scope.addressSource == "suggested") {
+                                $scope.address.address1 = $scope.suggestedAddress.address1;
+                                $scope.address.address2 = $scope.suggestedAddress.address2;
+                                $scope.address.city = $scope.suggestedAddress.city;
+                                $scope.address.state = $scope.suggestedAddress.state;
+                                $scope.address.zip = $scope.suggestedAddress.zip;
+                            }
                         }
 
                         //HIDE THE UI
@@ -163,8 +177,9 @@
                             {
                                 $timeout(function () {
                                     deferred.resolve({
+                                        data:{
                                         isValid: false
-                                    });
+                                    }});
                                 }, 1234);
                                 return deferred.promise;
 
@@ -175,8 +190,9 @@
                             {
                                 $timeout(function () {
                                     deferred.resolve({
+                                        data:{
                                         isValid: true
-                                    });
+                                    }});
                                 }, 1234);
                                 return deferred.promise;
 
@@ -221,7 +237,6 @@
 
                                 //show UI if original address is not valid
                                 if (!objReturned.isValid) {
-                                    $scope.ParentAddressFailsValidation = true;
 
                                     //server returns a suggested address
                                     if (objReturned.autoOrderReturnAddressDto) {
@@ -244,7 +259,7 @@
                                 else {
                                     $scope.ParentAddressFailsValidation = false;
                                     $scope.SuggestedAddress = false;
-                                    hasApproval_deferred.resolve({hasApproval: true});
+                                    hasApproval_deferred.resolve({hasApproval: true, address: $scope.address});
                                 }
                             })
                             .catch(
