@@ -210,7 +210,7 @@
                             address2: $scope.address.address2,
                             city: $scope.address.city,
                             state: $scope.address.state,
-                            zip: $scope.address.country,
+                            zip: $scope.address.zip,
                             country: $scope.address.country
                         }
 

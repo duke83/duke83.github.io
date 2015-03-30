@@ -1,0 +1,197 @@
+@using Nerium.Business.Helpers
+@using Nerium.Business.Managers
+@using Sitecore.Diagnostics
+@using Sitecore.Globalization
+@using Sitecore.Security.Accounts
+@model Sitecore.Mvc.Presentation.RenderingModel
+
+@{
+    try
+    {
+        User user = Sitecore.Context.User;
+        int autoOrderId = 0;
+
+        if (user != null)
+        {
+            var custId = user.Profile[BusinessConsts.UserProfile.CustomerId];
+
+            var serverErrorMessage = Translate.Text("Difficulty Retrieving Shipping Details");
+
+            <div class="row container" data-ng-controller="NewAdoShippingCtrl" data-ng-init="init(@custId)">
+ 
+
+                <div>
+                    <div data-ng-repeat="shippingAddress in shippingAddresses" class="shipping-address" data-ng-class-odd="'oddRow'" style="font-size: .85rem; margin-left: 1rem; margin-right: 1rem;">
+                        <div class="row">
+                            <div class="small-8 columns">
+                                <input type="radio" name="" id="" data-ng-checked="true" data-ng-click="selectAddress(shippingAddress)" />
+                                <label data-ng-class="{'address-selected':isSelected(shippingAddress)}">@Translate.Text("Preferred Shipping Address")</label>
+                            </div>
+
+                            <div class="small-4 columns text-right" ng-show="shippingAddress.type === 'Main'" style="font-weight:bold">@Translate.Text("Primary Account Address")</div>
+                        </div>
+
+                        <section class="button-container">
+
+                            <input type="button" value="@Translate.Text("Edit")" data-ng-click="editAddress(shippingAddress)" data-ng-hide="isDirty" />
+                        </section>
+                        <section data-ng-hide="shippingAddress.editMode">
+                            <div data-ng-show="shippingAddress.type !== 'Main'"> 
+                                <span data-ng-bind="shippingAddress.firstName"></span>
+                                <span data-ng-bind="shippingAddress.lastName"></span>
+                            </div>
+                            <div data-ng-show="shippingAddress.type !== 'Main'">
+                                <span data-ng-bind="shippingAddress.company"></span>
+                            </div>
+                            <div class="address-line">
+                                <span data-ng-bind="shippingAddress.address1"></span>
+                            </div>
+                            <div class="address-line">
+                                <span data-ng-bind="shippingAddress.address2"></span>
+                            </div>
+                            <div class="address-line">
+                                <span data-ng-bind="shippingAddress.city"></span>,
+
+                                <span data-ng-bind="shippingAddress.state"></span>
+                                <span data-ng-bind="shippingAddress.zip"></span>
+                            </div>
+                            <div>
+                                <span data-ng-bind="shippingAddress.country"></span>
+                            </div>
+                            <div data-ng-show="shippingAddress.type !== 'Main'">
+                                <span data-ng-bind="shippingAddress.phone"></span>
+                            </div>
+                            <div data-ng-show="shippingAddress.type !== 'Main'">
+                                <span data-ng-bind="shippingAddress.notes"></span>
+                            </div>
+                        </section>
+  
+                        <section data-ng-show="shippingAddress.editMode" class="edit-shipping-address">
+                            <form name="NewAdo-EditShippingAddress-Form" id="NewAdo-EditShippingAddress-Form" novalidate>
+                                @*VAILD ADDRESS CHECK INTERJECTION*@
+
+
+                                <div data-ng-show="shippingAddress.type !== 'Main'">
+                                    <div>
+                                        <span data-ng-show="firstNameRequired" class="fieldvalidationmessage">@Translate.Text("Enter First Name")</span>
+                                        <span data-ng-show="lastNameRequired" class="fieldvalidationmessage">@Translate.Text("Enter Last Name")</span>
+                                    </div>
+                                    <input type="text" name="firstName" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.firstName" placeholder="@Translate.Text("First Name")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'firstName')" ng-class="{'fieldvalidationerror':firstNameRequired}" required />
+                                    <input type="text" name="lastName" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.lastName" placeholder="@Translate.Text("Last Name")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'lastName')" ng-class="{'fieldvalidationerror':lastNameRequired}" required />
+                                </div>
+                                <div data-ng-show="shippingAddress.type !== 'Main'">
+                                    <input type="text" name="company" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.company" placeholder="@Translate.Text("Company Name")" />
+                                </div>
+
+
+                                <address-suggestion ng-attr-address="shippingAddress"></address-suggestion>
+
+
+
+                                <div>
+                                    <span data-ng-show="address1Required" class="fieldvalidationmessage">@Translate.Text("Enter Address")</span>
+                                </div>
+                                <div>
+                                    <input type="text" name="address1" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.address1" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("Address 1")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'address1')" ng-class="{'fieldvalidationerror':address1Required}" required />
+                                </div>
+                                <div>
+                                    <input type="text" name="address2" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.address2" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("Address 2")" />
+                                </div>
+                                <div>
+                                    <span data-ng-show="cityRequired" class="fieldvalidationmessage">@Translate.Text("Enter City")</span>
+                                    <span data-ng-show="stateRequired" class="fieldvalidationmessage">@Translate.Text("Enter State")</span>
+                                    <span data-ng-show="zipRequired" class="fieldvalidationmessage">@Translate.Text("Enter Zip")</span>
+                                </div>
+                                <div>
+                                    <input type="text" name="city" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.city" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("City")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'city')" ng-class="{'fieldvalidationerror':cityRequired}" required />
+                                    <input type="text" name="state" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.state" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("State")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'state')" ng-class="{'fieldvalidationerror':stateRequired}" required />
+                                    <input type="text" name="zip" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.zip" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("Zip Code")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'zip')" ng-class="{'fieldvalidationerror':zipRequired}" required />
+                                    <span class="country" data-ng-bind="newAdoService.autoOrderManagerDto.shipTo.country"></span>
+                                </div>
+                                <div data-ng-show="shippingAddress.type !== 'Main'">
+                                    <input type="text" name="phone" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.phone" placeholder="@Translate.Text("Phone")" />
+                                </div>
+                                <div data-ng-show="shippingAddress.type !== 'Main'">
+                                    <textarea name="notes" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.notes" placeholder="@Translate.Text("Special Instructions")"></textarea>
+
+                                </div>
+                            </form>
+                        </section>
+                        <div class="row tab-header">
+                            <div class="small-4 columns">
+                            </div>
+                            <div class="button-container small-8 right">
+                                <input type="button" value="@Translate.Text("Discard Changes")" data-ng-show="isDirty && !savePreferred" data-ng-click="discardChanges()" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pad-2">
+
+                        <button class="button tiny adoButton small-12" type="button" data-ng-click="addNewAddress()" data-ng-show="(!isDirty) || isAddNewExpanded">
+                            <i class="fa fa-plus"></i>
+                            @Translate.Text("Add New Address")
+                        </button>
+                        <label data-ng-show="isAddNewExpanded">@Translate.Text("Add New Shipping Address")</label>
+
+                        <section data-ng-show="isAddNewExpanded" class="edit-shipping-address">
+
+
+
+
+
+                            <form name="NewAdo-NewShippingAddress-Form" id="NewAdo-NewShippingAddress-Form" novalidate>
+
+                                <div>
+                                    <span data-ng-show="firstNameRequired" class="fieldvalidationmessage">@Translate.Text("Enter First Name")</span>
+                                    <span data-ng-show="lastNameRequired" class="fieldvalidationmessage">@Translate.Text("Enter Last Name")</span>
+                                </div>
+                                <div>
+                                    <input type="text" name="firstName" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.firstName" placeholder="@Translate.Text("First Name")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'firstName')" required />
+                                    <input type="text" name="lastName" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.lastName" placeholder="@Translate.Text("Last Name")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'lastName')" required />
+                                </div>
+                                <div>
+                                    <input type="text" name="company" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.company" placeholder="@Translate.Text("Company Name")" />
+                                </div>
+
+                                @*VAILD ADDRESS CHECK INTERJECTION*@
+                                <address-suggestion ng-attr-address="newAdoService.autoOrderManagerDto"></address-suggestion>
+
+                                <div>
+                                    <span data-ng-show="address1Required" class="fieldvalidationmessage">@Translate.Text("Enter Address")</span>
+                                </div>
+                                <div>
+                                    <input type="text" name="address1" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.address1" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("Address 1")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'address1')" required />
+                                </div>
+                                <div>
+                                    <input type="text" name="address2" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.address2" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("Address 2")" />
+                                </div>
+                                <div>
+                                    <span data-ng-show="cityRequired" class="fieldvalidationmessage">@Translate.Text("Enter City")</span>
+                                    <span data-ng-show="stateRequired" class="fieldvalidationmessage">@Translate.Text("Enter State")</span>
+                                    <span data-ng-show="zipRequired" class="fieldvalidationmessage">@Translate.Text("Enter Zip")</span>
+                                </div>
+                                <div>
+                                    <input type="text" name="city" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.city" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("City")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'city')" ng-class="{'fieldvalidationerror':cityRequired}" required />
+                                    <input type="text" name="state" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.state" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("State")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'state')" ng-class="{'fieldvalidationerror':stateRequired}" required />
+                                    <input type="text" name="zip" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.zip" ng-disabled="newAdoService.autoOrderManagerDto.shipTo.approvalInProgress" placeholder="@Translate.Text("Zip")" data-ng-blur="validateField(newAdoService.autoOrderManagerDto.shipTo, 'zip')" ng-class="{'fieldvalidationerror':zipRequired}" required />
+                                    <div>
+                                        <input type="text" name="phone" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.phone" placeholder="@Translate.Text("Phone")" />
+                                    </div>
+                                    <div>
+                                        <input type="text" name="notes" data-ng-model="newAdoService.autoOrderManagerDto.shipTo.notes" placeholder="@Translate.Text("Special Instructions")" />
+                                    </div>
+                                    <span>@Translate.Text("Questions Address or Shipping")</span>
+                                    <a data-ng-href="{{contactUsLink}}">@Translate.Text("Contact Us")</a>.
+                            </form>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+    catch (Exception ex)
+    {
+        Log.Error("Error rendering New Auto Order Shipping", ex, this);
+    }
+}
