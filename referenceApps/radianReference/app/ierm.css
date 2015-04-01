@@ -1,0 +1,26 @@
+.isolatedController {
+  border: 3px solid darkgray;
+  margin: 20px;
+  padding: 10px;
+}
+
+.tblGridDataViewer thead td{
+  border:1px solid gray;
+  padding:3px;
+  font-weight: bold;
+  font-size: small;
+}
+
+.tblGridDataViewer tbody td{
+  border:1px solid gray;
+  padding:3px;
+  font-weight: normal;
+  font-size: small;
+  text-align: center;
+}
+
+.iermchartdata{
+  margin-top: 10px;
+  margin-left: 100px;
+  margin-bottom: 100px;
+}

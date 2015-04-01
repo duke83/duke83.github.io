@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <!--CSS-->
+    <link href="../../../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../../../ierm.css" rel="stylesheet">
+
+    <!--VENDOR LIBRARIES-->
+    <script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../../bower_components/highcharts-release/highcharts.js"></script>
+    <script src="../../../bower_components/angular/angular.js"></script>
+    <script src="../../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../../../bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="../../../bower_components/angular-resource/angular-resource.js"></script>
+
+
+    <!--APPLICATION FILES-->
+    <script src="../performanceScorecard.app.js"></script>
+    <script src="../../../common/dataServices/dataServices.app.js"></script>
+    <script src="../../../common/dataServices/calculationResource.js"></script>
+    <script src="../../../common/dataServices/calculationResourceMock.js"></script>
+
+
+
+
+
+
+
+
+</head>
+<body>
+<h1>Isolated Development Testing: Performance Scorecard</h1>
+
+This should look like :
+
+<!--1ST INSTANCE OF PEFORMANCE SCORECARD CONTROLLER-->
+<div class="isolatedController" ng-app="thistestmod" ng-controller="PerformanceScorecardCtrl as vm">
+    {{vm.myname}}
+</div>
+
+<!--2ND INSTANCE OF PEFORMANCE SCORECARD CONTROLLER-->
+<div class="isolatedController" id="app2" ng-app="thistestmod1" ng-controller="PerformanceScorecardCtrl as vm">
+    <h5>A separate and distinct instance of PerformanceScorecardCtrl</h5>
+    {{vm.myname}}<input ng-model="vm.myname">
+</div>
+
+
+<script>
+    //BOOTSTRAP MODULE MANUALLY (OTHERWISE, SECOND INSTANCE WOULDN'T WORK)
+    angular.module('thistestmod', ['features.performanceScorecard'])
+   // angular.module('thistestmod1', ['features.performanceScorecard'])
+    //angular.bootstrap(document.getElementById('app2'), ['thistestmod1'])
+</script>
+</body>
+</html>

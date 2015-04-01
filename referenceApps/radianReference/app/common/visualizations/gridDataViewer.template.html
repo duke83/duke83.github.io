@@ -1,0 +1,13 @@
+        <table class="tblGridDataViewer" >
+            <thead>
+            <tr>
+                <td></td><td ng-repeat="h in gridData.data.xAxis">{{h}}</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="sa in gridData.data.seriesArray track by $index">
+                <td>{{sa.seriesName}}</td><td ng-repeat="itm in sa.data track by $index">{{itm.toFixed(2)}}</td>
+            </tr>
+            </tbody>
+        </table>
+

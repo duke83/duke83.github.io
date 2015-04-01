@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <!--CSS-->
+    <link href="../../../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../../../ierm.css" rel="stylesheet">
+
+    <!--VENDOR LIBRARIES-->
+    <script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../../bower_components/highcharts-release/highcharts.js"></script>
+    <script src="../../../bower_components/angular/angular.js"></script>
+    <script src="../../../bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+
+    <!--APPLICATION FILES-->
+    <script src="../visualizations.app.js"></script>
+
+    <script>
+        var thistest=angular.module('common.visualizations');
+
+        thistest.controller('testCtrl',['$scope',function($scope){
+
+                    $scope.AllCharts=[
+                       'ReturnOnAssets',
+                       'YieldOnLoans',
+                       'NetInterestMargin',
+                       'OverheadExpense_AverageAssets',
+                       'Alll_TotalLoans',
+                       'ProvisionExpense_AverageLoans',
+                       'NetChargeOffs_TotalLoans',
+                       'LeverageRatio',
+                       'TotalRiskBasedCapitalRatio',
+                       'TexasRatio',
+                       'AssetGrowth',
+                       'EfficiencyRatio',
+                       'Asset_Employee',
+                       'DepositConcetrationRatio',
+                       'LoanToDepositRatio',
+                       'PledgedSecurities_TotalSecurities',
+                       'LoanGrowth',
+                       'DepositGrowth'
+                    ]
+
+                    $scope.chartConfig = {
+                        options: {
+                            chart: {
+                                type: 'line'
+                            }
+                        },
+                        series: [{
+                            data: [6, 7.5, 7, 8, 8.4]
+                        }],
+                        xAxis: [{
+                            categories: ['2009', '2010', '2011', '2012', '2013']
+                        }],
+                        title: {
+                            text: 'Return on Assets'
+                        },
+
+                        loading: false
+                    }
+                }]);
+    </script>
+</head>
+<body ng-app="common.visualizations"  ng-controller="testCtrl">
+<h1>Isolated Development Testing: BASIC CHARTING</h1>
+quarter<input ng-model="quarter">
+cert<input ng-model="cert">
+<div ng-repeat="chart in AllCharts | orderBy:'toString()'" style="padding-left: 100px">
+    <p> $httpBackend.whenGET("/api/calculation/{{chart}}/10034/2014Q4").respond(calculations);</p>
+    <!--<h3>{{chart}}, {{quarter}}, {{cert}}</h3>-->
+    <!--<highchart id="chart1" config="chartConfig" style="width:400px; height:300px;"></highchart>highchart-->
+</div>
+
+{{chart1}}
+
+</body>
+</html>

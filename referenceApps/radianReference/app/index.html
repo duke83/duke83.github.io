@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--THIS FILE IS GENERATED via Grunt:htmlbuild FROM htmlBuildTemplates/index.html-->
+<html lang="en">
+
+<head>
+    <!--CSS FILES-->
+    <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="ierm.css" />
+</head>
+
+<body ng-app="iermClientApp">
+    <h1>Radian ERM</h1>
+
+    <h5>Reference Application</h5>
+    <span ng-controller="CertSelectorController">{{cert}}</span>
+     <a class="btn" ui-sref="dashboard">Dashboard</a>
+    <a class="btn" ui-sref="performanceScorecard">Performance Scorecared</a>
+
+    <div ui-view>
+
+    </div>
+
+    <subject-selector></subject-selector>
+
+    <!--LIBRARY SCRIPTS-->
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-mocks/angular-mocks.js"></script>
+    <script type="text/javascript" src="../bower_components/highcharts-release/highcharts.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="../bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+
+    <!--APPLICATION SCRIPTS-->
+    <script type="text/javascript" src="iermClientApp.js"></script>
+    <script type="text/javascript" src="common/dataServices/dataServices.app.js"></script>
+    <script type="text/javascript" src="common/dataServices/calculationResource.js"></script>
+    <script type="text/javascript" src="common/dataServices/calculationResourceMock.js"></script>
+    <script type="text/javascript" src="common/dataServices/customerService.js"></script>
+    <script type="text/javascript" src="common/navigation/navigation.app.js"></script>
+    <script type="text/javascript" src="common/navigation/subjectSelector.directive.js"></script>
+    <script type="text/javascript" src="common/visualizations/visualizations.app.js"></script>
+    <script type="text/javascript" src="common/visualizations/iermChart.directive.js"></script>
+    <script type="text/javascript" src="common/visualizations/gridDataViewer.directive.js"></script>
+    <script type="text/javascript" src="features/performanceScorecard/performanceScorecard.app.js"></script>
+    <script type="text/javascript" src="features/dashboard/dashboard.app.js"></script>
+    <script type="text/javascript" src="features/dashboard/dashboard.controller.js"></script>
+
+</body>
+
+</html>
