@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addressSuggestion Directive Test</title>
+
+    <link rel="stylesheet" href="../addressSuggestion/artifacts/main_bo_3_26_15.css">
+    <link rel="stylesheet" href="../addressSuggestion/style.css"/>
+</head>
+<body data-ng-app="app" style="padding: 2rem;">
+<style>
+    .testContainer {
+        border: 1px solid gray;
+        marginp-top: 30px;
+        padding: 20px;
+    }
+    .comment{
+        color:dodgerblue;
+        margin-top:1rem;
+
+    }
+
+</style>
+<div class="testContainer" ng-controller="testCase1Ctrl">
+    <h2>dropdown for states in ADO Manager</h2>
+    <div class="comment">The address object we want to bind to:</div>
+    {{address}}
+
+    <div class="comment">The state property isolated out of address (just for deomonstration):</div>
+    {{address.state}}
+    <div></div>
+    <select ng-model="address.state" ng-options="st.regionCode as st.regionDescription for st in states"></select>
+
+
+    <div class="comment">The $scope.states property (an array of objects):</div>
+        <div style="color:silver">{{states}}</div>
+</div>
+
+<!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
+<script src="../addressSuggestion/vendor_local/jquery.min.js"></script>
+<script src="../addressSuggestion/vendor_local/angular.js"></script>
+<!-- ISOLATED UI DEV VENDOR SCRIPTS END -->
+
+
+<!-- APPLICATION SCRIPTS START -->
+<script src="app.js"></script>
+<script src="../addressSuggestion/webConfigFake.js"></script>
+<script src="../addressSuggestion/addressSuggestion.js"></script>
+<script src="../addressSuggestion/serverApiFake.js"></script>
+<!-- APPLICATION SCRIPTS START -->
+
+</body>
+</html>
