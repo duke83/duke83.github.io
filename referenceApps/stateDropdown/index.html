@@ -32,6 +32,18 @@
     <div></div>
     <select ng-model="address.state" ng-options="st.regionCode as st.regionDescription for st in states"></select>
 
+<hr>
+
+    <div class="comment">When state in address is a lower case abbreviation:</div>
+    {{address1}}
+
+    <div class="comment">The state property isolated out of address (just for deomonstration):</div>
+    {{address1.state}}
+    <div></div>
+
+
+    <select ng-model="address1.state" ng-options="st.regionCode as st.regionDescription for st in states"></select>
+
 
     <div class="comment">The $scope.states property (an array of objects):</div>
         <div style="color:silver">{{states}}</div>

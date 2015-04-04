@@ -12,6 +12,13 @@ app.controller('testCase1Ctrl', ['$scope', function ($scope) {
         zip: "99321"
     };
 
+    $scope.address1={
+        address1: "123 Elm",
+        address2: "",
+        city: "Berkley",
+        state: "ca",
+        zip: "99321"
+    };
 
 
 }]);
