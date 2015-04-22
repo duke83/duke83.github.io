@@ -4,6 +4,16 @@
 
             var serverApi = {};
 
+            serverApi.returnForInvalidAddressSuggestionProvided = {
+                isValid: false, autoOrderReturnAddressDto: {
+                    address1: "580 Garner Rd",
+                    address2: "yyy",
+                    city: "CJ",
+                    state: "OR",
+                    zip: "92232"
+                }
+            };
+
             serverApi.validateShippingAddress = function (mockScenario) {
                 var deferred = $q.defer();
 
@@ -13,15 +23,7 @@
                     case "Case1":
                     {
                         $timeout(function () {
-                            deferred.resolve({
-                                isValid: false, autoOrderReturnAddressDto: {
-                                    address1: "580 Garner Rd",
-                                    address2: "yyy",
-                                    city: "CJ",
-                                    state: "OR",
-                                    zip: "92232"
-                                }
-                            });
+                            deferred.resolve(serverApi.returnForInvalidAddressSuggestionProvided );
                         }, 1234);
                         return deferred.promise;
                     }

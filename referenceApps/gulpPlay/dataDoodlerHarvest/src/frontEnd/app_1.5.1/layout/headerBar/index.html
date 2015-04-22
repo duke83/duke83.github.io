@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <base href="http://localhost:63342/datadoodler/src/client/">
+
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg">
+
+</head>
+<body ng-app="layout.module">
+
+<h1>headerBar Directive</h1>
+<ul><li>The headerBar should show the dataDoodler small logo</li>
+    <li>background color should be ddGreen</li>
+    <li>Title of doodle should be centered</li>
+    <li>Title comes from ddModel.title</li>
+    <li>login directive should be on the right</li>
+    <li><img ng-src="app_1.5.1/layout/headerBar/_artifacts/headerBar.png" style="width:700px"> </li>
+</ul>
+<header-bar></header-bar>
+
+
+<!--VENDOR SCRIPTS-->
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../../bower_components/angular/angular.js"></script>
+
+
+<!--APPLICATION SCRIPTS-->
+<script src="app_1.5.1/layout/layout.module.js"></script>
+<script src="app_1.5.1/dataDoodler.module.js"></script>
+<script src="app_1.5.1/data/model/modelService.js"></script>
+<script src="app_1.5.1/data/data.module.js"></script>
+<script src="app_1.5.1/layout/headerBar/headerBar.directive.js"></script>
+</body>
+</html>

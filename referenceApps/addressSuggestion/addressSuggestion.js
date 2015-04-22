@@ -43,7 +43,7 @@
 
                     // THIS PROMISE WILL BE RESOLVED WHEN
                     // USER SELECTS THE OK BUTTON
-                    var userInput_deferred = $q.defer();
+                    //var userInput_deferred = $q.defer();
 
                     //This property allows other fields to disabled until user clicks OK.
                     $scope.address.approvalInProgress = false;

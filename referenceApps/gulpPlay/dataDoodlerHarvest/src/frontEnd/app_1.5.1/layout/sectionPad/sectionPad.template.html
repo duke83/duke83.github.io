@@ -1,0 +1,18 @@
+<div
+        ng-class="'section-pad-container ' + sect.title.toLowerCase() + '-section-pad-container'"
+        >
+
+    <div ng-class="'section-pad-header ' + sect.title.toLowerCase() + '-section-pad-header'">
+        <span class="section-pad-title" ng-bind="sect.title"></span>
+        <span ng-class="'section-pad-minimize '  + sect.title.toLowerCase() + '-section-pad-minimize ' +  'glyphicon glyphicon-minus'"
+              ng-click="sect.minimized=true"></span>
+        <span ng-class="'section-pad-close '  + sect.title.toLowerCase() + '-section-pad-close ' +  'glyphicon glyphicon-remove'"
+              ng-click="sect.active=false"></span>
+    </div>
+
+    <div ng-class="'section-pad-content ' + sect.title.toLowerCase() + '-section-pad-content ' ">
+
+        <glossary ng-if="sect.title.toLowerCase()==='glossary'"></glossary>
+    </div>
+
+</div>

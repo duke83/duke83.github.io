@@ -1,0 +1,18 @@
+
+<span class="desktop">
+<div class="menu-bar">
+    <span ng-repeat="window in modelService.windows"
+            ng-bind="window.title"
+            class="menu-bar-button"
+            ng-click="modelService.activateWindow(window.title)"></span>
+</div>
+
+    <div section-pad ng-repeat="sect in modelService.windows"
+                 sect="sect"
+                 ng-style="{width:sect.width,height:sect.height,top:sect.top,left:sect.left,'z-index':sect.z}"
+                 style="position:absolute;display:inline-block"
+                 ng-click="modelService.activateWindow(sect.title,$event)"
+                 ng-if="sect.active"
+                 ng-hide="sect.minimized"
+            ></div>
+</span>

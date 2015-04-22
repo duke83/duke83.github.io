@@ -1,0 +1,17 @@
+<div class="glossary-directive-container">
+    <datasources-panel></datasources-panel>
+
+    <div class="glossary-directive-search-bar">
+        <span class="glyphicon glyphicon-search"></span>
+        <input type="text">
+    </div>
+    <table>
+        <thead><tr><td>Variable</td><td>Short Description</td><td ng-show="showLongDesc">Long Description</td></tr></thead>
+        <tr ng-repeat="itm in glossary">
+            <td ng-bind="itm.varName"></td>
+            <td ng-bind="itm.shortDesc"></td>
+            <td ng-bind="itm.longDesc" ng-show="showLongDesc"></td>
+        </tr>
+    </table>
+
+</div>

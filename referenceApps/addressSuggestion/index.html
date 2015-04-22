@@ -12,7 +12,7 @@
 <style>
     .testContainer {
         border: 1px solid gray;
-        marginp-top: 30px;
+        margin-top: 30px;
         padding: 20px;
     }
 
@@ -25,7 +25,7 @@
 </style>
 <div class="testContainer">
     <h2>Case1: Invalid Address, Suggestion Provided</h2>
-    <h5>Mock service will return:<span class="mock-service-return">{isValid: false, autoOrderReturnAddressDto: {address1: "580 Garner Rd",address2: "",city: "CJ",state: "OR", zip: "92232"}</span>
+    <h5>Mock service will return:<span class="mock-service-return" ng-bind="serverApiWillReturn | json"></span>
     </h5>
 
     <div data-ng-controller="testCase1Ctrl">
