@@ -1,0 +1,11 @@
+<span>
+    <span class="leftArrow" ng-click="advanceLeft()"><--</span>
+    <span ng-repeat="itm in items" ng-show="itemIsInWindow($index)">
+        <span class="horizontal-image-scroller-item-container">
+            <span class="horizontal-image-scroller-image"><img ng-src="itm.imageUrl" width="100"/></span>
+            <span class="horizontal-image-scroller-description" ng-bind="itm.description"></span>
+        </span>
+    </span>
+<span class="rightArrow" ng-click="advanceRight()">--></span>
+    <div>current item: {{currentItem}}</div>
+</span>

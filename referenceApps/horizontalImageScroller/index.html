@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    .horizontal-image-scroller-item-container{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border:1px gray solid;
+        margin-left: .5rem;
+        margin-right:.5rem;
+    }
+    .horizontal-image-scroller-image{}
+    .horizontal-image-scroller-description{}
+</style>
+<body ng-app="app">
+{{3+2}}
+<script>
+    var myObj=[
+        {"description":"thi sis a description1","imageUrl":"http://images.nerium.com/abc1.jpg"},
+        {"description":"this is a description2","imageUrl":"http://images.nerium.com/def2.jpg"},
+        {"description":"this is a description3","imageUrl":"http://images.nerium.com/def3.jpg"},
+        {"description":"this is a description4","imageUrl":"http://images.nerium.com/def4.jpg"},
+        {"description":"this is a description5","imageUrl":"http://images.nerium.com/def5.jpg"},
+        {"description":"this is a description6","imageUrl":"http://images.nerium.com/def6.jpg"}];
+
+    var myObj1=[
+        {"description":"Obj1 description1","imageUrl":"http://images.nerium.com/abc1.jpg"},
+        {"description":"Obj1 description2","imageUrl":"http://images.nerium.com/def2.jpg"},
+        {"description":"Obj1 description3","imageUrl":"http://images.nerium.com/def3.jpg"},
+        {"description":"Obj1 description4","imageUrl":"http://images.nerium.com/def4.jpg"},
+        {"description":"Obj1 description5","imageUrl":"http://images.nerium.com/def5.jpg"},
+        {"description":"Obj1 description6","imageUrl":"http://images.nerium.com/def6.jpg"}]
+</script>
+<h1>widgetSlider Prototype</h1>
+
+<horizontal-image-scroller items-object-name="myObj" viewable-items-length="4"></horizontal-image-scroller >
+<hr>
+<horizontal-image-scroller items-object-name="myObj1" viewable-items-length="2"></horizontal-image-scroller >
+
+<!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
+<script src="vendor_local/jquery.min.js"></script>
+<script src="vendor_local/angular.js"></script>
+<!-- ISOLATED UI DEV VENDOR SCRIPTS END -->
+
+
+<!-- APPLICATION SCRIPTS START -->
+<script src="app.js"></script>
+<script src="horizontalImageScroller.directive.js"></script>
+<!-- APPLICATION SCRIPTS END -->
+
+
+</body>
+</html>
