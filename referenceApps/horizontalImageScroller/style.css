@@ -1,0 +1,48 @@
+.horizontal-image-scroller-item-container{
+    display: inline-block;
+    /* width: 100px; */
+    /* height: 100px; */
+    border:1px gray solid;
+    margin-left: .5rem;
+    margin-right:.5rem;
+}
+
+
+.horizontal-image-scroller-item-container.ng-hide-add{
+    -webkit-animation: fadeOutLeft 1s;
+    -moz-animation: fadeOutLeft 1s;
+    -ms-animation: fadeOutLeft 1s;
+    animation: fadeOutLeft 1s;
+}
+
+.horizontal-image-scroller-item-container.ng-hide-remove{
+    -webkit-animation: slideInRight 1s;
+    -moz-animation: slideInRight 1s;
+    -ms-animation: slideInRight 1s;
+    animation: slideInRight 1s;
+}
+
+.horizontal-image-scroller-image{}
+.horizontal-image-scroller-description{}
+
+.rightArrow{cursor: pointer}
+.leftArrow{cursor:pointer}
+
+.selected-add{
+    transition:color 1s linear;
+}
+
+.selected,
+.selected-add-active{
+    color:blue;
+}
+
+.selected-remove{
+    transition: color 1s linear;
+}
+
+.selected-remove-active{
+
+}
+
+
