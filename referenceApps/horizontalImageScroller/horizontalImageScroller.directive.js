@@ -13,27 +13,35 @@
                     var viewableItemsLength = Number(attr.viewableItemsLength);
 
                     //The items is a JSON array that exists in the window scope.  It is written in a razor file that is fed from sitecore
-                    scp.items = window[attr.itemsObjectName];
+                    scp.allItems = window[attr.itemsObjectName];
 
                     scp.imageHeight=parseInt(attr.imageHeight) + 'px'
 
+
+                    scp.visibleItems=[];
+                    for(var i=0;i<4;i++){
+                        scp.visibleItems.push(scp.allItems[i]);
+                    }
+
+
+
                     scp.itemIsInWindow = function (idx) {
-                        if (idx < scp.currentItem.value + viewableItemsLength && !(idx < scp.currentItem.value)) {
+                        if (idx < scp.firstItemIndex.value + viewableItemsLength && !(idx < scp.currentItem.value)) {
                             return true;
                         }
                         return false;
                     };
 
-                    scp.currentItem = { value: 0 };
+                    scp.firstItemIndex= { value: 0 };
 
                     scp.advanceLeft = function () {
-                        if(scp.currentItem.value>0)
-                        scp.currentItem.value = scp.currentItem.value - 1;
+                        if(scp.firstItemIndex.value>0)
+                        scp.firstItemIndex.value = scp.firstItemIndex.value - 1;
                     };
 
                     scp.advanceRight = function () {
-                        if(scp.currentItem.value<(scp.items.length-viewableItemsLength))
-                        scp.currentItem.value = scp.currentItem.value + 1;
+                        if(scp.firstItemIndex.value<(scp.items.length-viewableItemsLength))
+                        scp.firstItemIndex.value = scp.firstItemIndex.value + 1;
                     }
                 }
 

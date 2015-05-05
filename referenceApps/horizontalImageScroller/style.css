@@ -1,10 +1,12 @@
 .horizontal-image-scroller-item-container{
     display: inline-block;
-    /* width: 100px; */
-    /* height: 100px; */
+    width: 100px;
+    height: 100px;
     border:1px gray solid;
     margin-left: .5rem;
     margin-right:.5rem;
+    text-align: center;
+    clear: both;
 }
 
 
@@ -22,8 +24,20 @@
     animation: slideInRight 1s;
 }
 
-.horizontal-image-scroller-image{}
-.horizontal-image-scroller-description{}
+.horizontal-image-scroller-image{
+    width: 100;
+    background-color: pink;
+    /* right: 1px; */
+    /* margin-right: 0px; */
+    /* margin-left: auto; */
+    /* text-align: center; */
+    /* position: relative; */
+    /* left: 10px; */
+}
+.horizontal-image-scroller-description{
+    display: block;
+    margin: 11px;
+}
 
 .rightArrow{cursor: pointer}
 .leftArrow{cursor:pointer}
