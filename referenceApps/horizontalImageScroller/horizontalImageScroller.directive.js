@@ -15,6 +15,7 @@
                     //The items is a JSON array that exists in the window scope.  It is written in a razor file that is fed from sitecore
                     scp.allItems = window[attr.itemsObjectName];
 
+                    scp.title=attr.title;
                     scp.imageHeight = parseInt(attr.imageHeight) + 'px'
 
 
@@ -24,12 +25,6 @@
                     }
 
 
-                    scp.itemIsInWindow = function (idx) {
-                        if (idx < scp.firstItemIndex.value + visableItemsLength && !(idx < scp.currentItem.value)) {
-                            return true;
-                        }
-                        return false;
-                    };
 
                     scp.firstItemIndex = {value: 0};
 

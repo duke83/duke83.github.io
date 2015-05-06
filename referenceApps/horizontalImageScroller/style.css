@@ -1,8 +1,68 @@
+.horizontal-image-scroller-dirictive-container{
+    /* overflow-x: auto; */
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow: hidden;
+    /* overflow-y: hidden; */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: relative;
+}
+
+.horizontal-image-scroller-dirictive-container {}
+
+.horizontal-image-scroller-items-container{
+
+
+    border-bottom: solid;
+    
+
+
+    display: inline-block;
+    
+
+
+    width: 95%;
+    
+
+
+    margin-right: -40px;
+    
+
+
+    /* margin-left: 5%; */
+    
+
+
+    /* left: 10px; */
+    
+
+
+    /* right:0px; */
+    position: relative;
+    border-bottom: 3px solid #53ABAE;
+    padding-bottom: 5px;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #fafff9 91%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(91%,#fafff9)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#fafff9 91%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#fafff9 91%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#fafff9 91%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#fafff9 91%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafff9',GradientType=0 ); /* IE6-9 */
+
+    
+
+
+    /* overflow: hidden; */
+
+
+}
+
 .horizontal-image-scroller-item-container {
     display: inline-block;
     width: 100px;
     height: 100px;
-    border: 1px gray solid;
+
     margin-left: .5rem;
     margin-right: .5rem;
     text-align: center;
@@ -30,33 +90,33 @@
 .horizontal-image-scroller-description {
     display: block;
     margin: 11px;
+    white-space: normal;
+}
+
+.horizontal-image-scroller-arrow-left-container{
+    display: inline-block;
+    position: relative;
+    
+    top: -19px;
+}
+
+.horizontal-image-scroller-arrow-right-container{
+    display: inline-block;
+    position:absolute;
+    right: 0px;
 }
 
 .horizontal-image-scroller-arrow {
     cursor: pointer;
-    top: 10px;
-    /* bottom: 50%; */
-    /* display: inline-block; */
-    position: relative;
-    /* background-color: green; */
-    vertical-align: top;
+    height: 90px;
+
+    margin-top: 40px;
+    /* margin-bottom: 50%; */
+    top: 30px;
 }
 
-.selected-add {
-    transition: color 1s linear;
+.horizontal-image-scroller-title{
+    color:#53ABAE;
+    font-weight: bold;
+    text-align: center;
 }
-
-.selected,
-.selected-add-active {
-    color: blue;
-}
-
-.selected-remove {
-    transition: color 1s linear;
-}
-
-.selected-remove-active {
-
-}
-
-
