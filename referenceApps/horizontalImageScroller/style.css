@@ -1,29 +1,22 @@
 .horizontal-image-scroller-dirictive-container {
-    /* overflow-x: auto; */
     white-space: nowrap;
     overflow-y: hidden;
     overflow: hidden;
-    /* overflow-y: hidden; */
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     position: relative;
-    /* vertical-align: top; */
+    display: block;
 }
 
-.horizontal-image-scroller-dirictive-container {
-}
 .horizontal-image-scroller-items-container-container{
-   display:inline-block;
-
+   display: inline-block;
    position: relative;
-   left: 24px;
-   width: 100%;
+   left: 29px;
+   width: 98%;
 }
+
 .horizontal-image-scroller-items-container {
-    /* border-bottom: solid; */
     display: table;
     width: 95%;
-    /* margin-right: -40px; */
-    /* position: relative; */
     border-bottom: 3px solid #53ABAE;
     padding-bottom: 5px;
     background: #ffffff; /* Old browsers */
@@ -38,14 +31,21 @@
 
 .horizontal-image-scroller-item-container {
     display: table-cell;
-    /* width: 100px; */
-    /* height: 100px; */
-
-    /* margin-left: .5rem; */
-    /* margin-right: .5rem; */
-    text-align: center;
-    /* clear: both; */
+     width: 1000px; /*net effect of equalizing widths*/
+     text-align: center;
 }
+
+.horizontal-image-scroller-item-container.ng-enter{
+    opacity:0;
+    animation: 1s linear all;
+    transition: opacity ;
+}
+
+.horizontal-image-scroller-item-container.ng-enter-active{
+
+    opacity: 1;
+}
+
 
 .horizontal-image-scroller-item-container.ng-hide-add {
     -webkit-animation: fadeOutLeft 1s;
@@ -63,38 +63,47 @@
 
 .horizontal-image-scroller-image {
     width: 100px;
+    height: 100px;
+    position: relative;
+    /* display: table-caption; */
+    /* text-align: center; */
 }
 
 .horizontal-image-scroller-description {
     display: block;
     margin: 11px;
     white-space: normal;
+    font-size:.8rem;
 }
 
 .horizontal-image-scroller-arrow-left-container {
-    /* display: inline-block; */
     position: absolute;
-
-    left: 0px;
 }
 
 .horizontal-image-scroller-arrow-right-container {
     display: inline-block;
     position: absolute;
-    right: 0px;
+    right: 0;
+    margin-left: 10px;
 }
 
 .horizontal-image-scroller-arrow {
     cursor: pointer;
     height: 90px;
-
     margin-top: 40px;
-    /* margin-bottom: 50%; */
-    /* top: 30px; */
+}
+
+.horizontal-image-scroller-arrow-enabled{
+    fill:#53ABAE;
+}
+
+.horizontal-image-scroller-arrow-disabled{
+    fill:lightgray;
 }
 
 .horizontal-image-scroller-title {
     color: #53ABAE;
     font-weight: bold;
     text-align: center;
+    display: block;
 }

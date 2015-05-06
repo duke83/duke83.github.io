@@ -1,16 +1,17 @@
-<div class="horizontal-image-scroller-dirictive-container">
+<span class="horizontal-image-scroller-dirictive-container">
 
     <span ng-click="advanceLeft()" class="horizontal-image-scroller-arrow-left-container">
-        <svg class="horizontal-image-scroller-arrow"  version="1.1" x="0px" y="0px" viewBox="0 0 124.9 390.1"
-             xml:space="preserve">
-            <polygon fill="#53ABAE" points="0.5,195.1 124.3,388.4 124.3,1.7 "/>
+       <svg class="horizontal-image-scroller-arrow" version="1.1" baseProfile="basic" id="Layer_1"
+	        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 124.9 390.1"
+	        xml:space="preserve">
+            <polygon name="arrowLeft" class="horizontal-image-scroller-arrow-disabled"  points="0.5,195.1 124.3,388.4 124.3,1.7 "/>
         </svg>
     </span>
 
     <span class="horizontal-image-scroller-items-container-container">
             <span class="horizontal-image-scroller-items-container">
 
-                <span ng-repeat="itm in visibleItems"
+                <span ng-repeat="itm in visibleItems" track by $index
                       class="horizontal-image-scroller-item-container">
 
                         <span class="horizontal-image-scroller-image"><img ng-src="{{itm.imageUrl}}"
@@ -24,9 +25,9 @@
 
         <svg class="horizontal-image-scroller-arrow" version="1.1"  x="0px" y="0px" viewBox="0 0 124.9 390.1"
          xml:space="preserve">
-            <polygon fill="#53ABAE" points="124.3,195.1 0.5,388.4 0.5,1.7 "/>
+            <polygon name="arrowRight" class="horizontal-image-scroller-arrow-enabled" points="124.3,195.1 0.5,388.4 0.5,1.7 "/>
         </svg>
     </span>
 
-    <div class="horizontal-image-scroller-title" ng-bind="title"></div>
-</div>
+    <span class="horizontal-image-scroller-title" ng-bind="title"></span>
+</span>
