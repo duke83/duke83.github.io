@@ -16,7 +16,7 @@
 
 <script>
     var myObj=[
-        {"description":"thi sis a description1","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
+        {"description":"thi sis a description, and it is much longer","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
         {"description":"this is a description2","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
         {"description":"txhis is a description3","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
         {"description":"this is a description4","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gix"},
@@ -30,30 +30,29 @@
             ];
 
     var myObj1=[
-        {"description":"thi sis a description1","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
-        {"description":"this is a description2","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
-        {"description":"txhis is a description3","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
-        {"description":"this is a description4","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gix"},
-        {"description":"this is a description5","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
-        {"description":"this is a description6","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
-        {"description":"this is a description7","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
-        {"description":"this is a description8","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
-        {"description":"this is a description9","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
+
         {"description":"this is a description10","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"},
         {"description":"this is a description11","imageUrl":"http://www.ninjablogsetup.com/wp-content/uploads/anchor.gif"}
+
     ];
 </script>
 <h1>Horizontal Image Scroller Prototype</h1>
 
+<hr>
+<horizontal-image-scroller items-object-name="myObj1" viewable-items-length="4" image-height="100" title="Hot Pockets"></horizontal-image-scroller >
 
+
+<horizontal-image-scroller items-object-name="myObj1x" viewable-items-length="1" image-height="100" title="Hot Topics"></horizontal-image-scroller >
+<hr>
 <horizontal-image-scroller items-object-name="myObj" viewable-items-length="4" image-height="100" title="Hot Topics"></horizontal-image-scroller >
 <hr>
 <br/>
 <span style="position: inherit; display: inline-block;width:400px;height:200px;">
-    <horizontal-image-scroller items-object-name="myObj1" viewable-items-length="3" image-height="50" title="Hot Topics"></horizontal-image-scroller >
+    <horizontal-image-scroller items-object-name="myObj" viewable-items-length="2" image-height="50" title="Hot Topics"></horizontal-image-scroller >
+</span>
+<span style="position: inherit; display: inline-block;width:400px;height:200px;">
+    <horizontal-image-scroller items-object-name="myObj1" viewable-items-length="2" image-height="50" title="Hot Topics"></horizontal-image-scroller >
 </span> abc
-<hr>
-<horizontal-image-scroller items-object-name="myObj1" viewable-items-length="2" image-height="100" title="Hot Pockets"></horizontal-image-scroller >
 
 
 <!-- ISOLATED UI DEV VENDOR SCRIPTS START -->

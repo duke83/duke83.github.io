@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="vendor_local/animate.css">
+</head>
+<style>
+
+
+</style>
+<body ng-app="app">
+
+<script>
+    var allTags=[
+        "Compensation Plan","Scientific Study", "Meeting Schedule", "Meeting Agenda", "Directions", "Wish List", "Warning"
+            ];
+</script>
+<h1>Tag Search Prototype</h1>
+
+<hr>
+<tag-search></tag-search>
+
+<horizontal-image-scroller items-object-name="myObj1x" viewable-items-length="1" image-height="100" title="Hot Topics"></horizontal-image-scroller >
+<hr>
+<horizontal-image-scroller items-object-name="myObj" viewable-items-length="4" image-height="100" title="Hot Topics"></horizontal-image-scroller >
+<hr>
+<br/>
+<span style="position: inherit; display: inline-block;width:400px;height:200px;">
+    <horizontal-image-scroller items-object-name="myObj" viewable-items-length="2" image-height="50" title="Hot Topics"></horizontal-image-scroller >
+</span>
+<span style="position: inherit; display: inline-block;width:400px;height:200px;">
+    <horizontal-image-scroller items-object-name="myObj1" viewable-items-length="2" image-height="50" title="Hot Topics"></horizontal-image-scroller >
+</span> abc
+
+
+<!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
+<script src="vendor_local/jquery.min.js"></script>
+<script src="vendor_local/angular.js"></script>
+<script src="vendor_local/angular-animate.js"></script>
+<!-- ISOLATED UI DEV VENDOR SCRIPTS END -->
+
+
+<!-- APPLICATION SCRIPTS START -->
+<script src="app.js"></script>
+<script src="horizontalImageScroller.directive.js"></script>
+<!-- APPLICATION SCRIPTS END -->
+
+
+</body>
+</html>
