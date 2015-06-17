@@ -16,7 +16,9 @@
 
                         <span class="horizontal-image-scroller-image"><img ng-src="{{itm.imageUrl}}"
                                                                            ng-style="{height:imageHeight}"/></span>
-                        <span class="horizontal-image-scroller-description" ng-bind="itm.description"></span>
+                        <span class="horizontal-image-scroller-description"
+                              ng-style="descriptionHeight"
+                              ng-bind="itm.description"></span>
                 </span>
             </span>
     </span>

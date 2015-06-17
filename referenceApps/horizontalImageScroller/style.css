@@ -6,13 +6,17 @@
     position: relative;
     display: block;
     margin-top: 1.25rem;
+    /* height: 500px; */
+    /* background-color: pink; */
 }
 
 .horizontal-image-scroller-dirictive-table{
     display:table;
     width:100%;
 }
-
+.horizontal-image-scroller-description-height{
+    height: 5px;
+}
 .horizontal-image-scroller-items-container-container{
    display: inline-block;
    position: relative;
@@ -75,6 +79,8 @@
     margin: 11px;
     white-space: normal;
     font-size:.8rem;
+
+    min-height: 20px;
 }
 
 .horizontal-image-scroller-arrow-left-container {

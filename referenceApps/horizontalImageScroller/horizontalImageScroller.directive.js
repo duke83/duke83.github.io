@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('app')
-        .directive('horizontalImageScroller', function () {
+        .directive('horizontalImageScroller', function ($timeout) {
             return {
                 restrict: 'E',
                 templateUrl: 'horizontalImageScroller.html',
@@ -30,6 +30,16 @@
                     scp.title = attr.title;
                     scp.imageHeight = parseInt(attr.imageHeight) + 'px'
 
+
+                    function getMaxDescriptionHeight(){
+
+                        var tallestHeight=45
+                        var alldescriptions = $(".horizontal-image-scroller-description");
+                        console.log('alldescriptions',alldescriptions);
+                        return {"min-height":tallestHeight+"px"};
+                    }
+
+                    scp.descriptionHeight=$timeoutgetMaxDescriptionHeight();
 
                     scp.visibleItems = [];
                     for (var i = 0; i < visibleItemsLength; i++) {

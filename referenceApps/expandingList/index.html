@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addressSuggestion Directive Test</title>
+
+    <link rel="stylesheet" href="artifacts/main_bo_6_11_15.css">
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body data-ng-app="app" style="padding: 2rem;">
+
+<div ng-controller="outsideController">
+
+    <asset-category data-ng-repeat="cat in categories" cat="cat" slct='updateselected(selectedobj)' "></asset-category>
+</div>
+
+
+<!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
+<script src="vendor_local/jquery.min.js"></script>
+<script src="vendor_local/angular.js"></script>
+<!-- ISOLATED UI DEV VENDOR SCRIPTS END -->
+
+
+<!-- APPLICATION SCRIPTS START -->
+<script src="expandingList.directive.js"></script>
+<!-- APPLICATION SCRIPTS START -->
+
+</body>
+</html>

@@ -1,54 +1,1146 @@
+
+
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <link href="style.css" type="text/css" rel="stylesheet">
+<html data-ng-app="app" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title idle-disabled="true">Marketing Center</title>
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href="/assets/css/backoffice/main.css" rel="stylesheet" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="vendor_local/animate.css">
+    <link href="/assets/vendor/qtip2/jquery.qtip.css" rel="stylesheet" />
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
 </head>
-<style>
+<body>
+<main id="page-wrap" class="off-canvas-wrap">
+    <header>
+        <nav class="top-nav" data-topbar role="navigation" data-options="sticky_on: large" data-ng-controller="MessagesCtrl">
 
 
-</style>
-<body ng-app="app">
+            <ul>
+                <li class="count-container">
+                    <a href="#" data-dropdown="header-messages" data-options="is_hover:false;">
+                        <i class="fa fa-envelope"></i>
+                        <span class="show-for-large-up">Messages</span>
+                        <div class="count" data-ng-show="totalUnreadMessages > 0" data-ng-bind="totalUnreadMessages"></div>
+                    </a>
+                    <div id="header-messages" data-dropdown-content class="f-dropdown content" aria-hidden="true" tabindex="-1">
+                        <div class="dropdown-body">
+                            <header>
+                                My Messages
+                                <a href="messages" class="right">New Message</a>
+                            </header>
+                            <div>
+                                <div class="row" data-ng-click="openMessage(message)" id="header_notification_row" data-ng-repeat="message in messages | limitTo:20">
+                                    <div class="small-2 column comment-avatar">
+                                        <img src="/assets/img/backoffice/avatar.png" alt="{{message.name}}'s Profile Image'" />
+                                    </div>
+                                    <div class="small-7 column">
+                                        <div data-ng-bind="message.name"></div>
+                                        <div data-ng-bind="message.post"></div>
+                                    </div>
+                                    <div class="small-3 column">
+                                        <span data-ng-bind="message.lastupdated"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer data-ng-controller="MessagesCtrl">
+                                <span><a href="/messages">View All</a></span>
+                            </footer>
+                        </div>
+                    </div>
+                </li>
+                <li class="count-container">
+                    <a href="#" data-dropdown="header-notifications" data-options="is_hover:false">
+                        <i class="fa fa-bell"></i>
+                        <span class="show-for-large-up">Notifications</span>
+                        <div class="count" data-ng-show="totalUnreadNotifications > 0" data-ng-bind="totalUnreadNotifications"></div>
+                    </a>
+                    <div id="header-notifications" data-dropdown-content class="f-dropdown content" aria-hidden="true" tabindex="-1">
+                        <div class="dropdown-body">
+                            <header>
+                                Notifications
+                                <a href="settings/communications" class="right">Settings</a>
+                            </header>
+                            <div>
+                                <ul class="small-block-grid-5 filters">
+                                    <li><i class="fa fa-comment" data-ng-click="show('chatNotifications')" title="forum notifications"></i></li>
+                                    <li><i class="fa fa-star" data-ng-click="show('rankNotifications')" title="rank advancements"></i></li>
+                                    <li><i class="fa fa-user" data-ng-click="show('peopleNotifications')" title="new enrollments"></i></li>
+                                    <li><i class="fa fa-file-text" data-ng-click="show('ordersNotifications')" title="new orders"></i></li>
+                                    <li><i class="fa fa-reorder" data-ng-click="show('showAllNotifications')" title="show all"></i></li>
+                                </ul>
+                                <div class="row" data-ng-click="openNotification(notification)" id="header_notification_row" data-ng-repeat="notification in notificationsChat | limitTo:20" data-ng-show="chatNotificationsVisible">
+                                    <div class="small-2 column comment-avatar">
+                                        <img src="/assets/img/backoffice/avatar.png" alt="{{notification.name}}'s Profile Image'" />
+                                    </div>
+                                    <div class="small-7 column">
+                                        <div data-ng-bind="notification.name"></div>
+                                        <div data-ng-bind="notification.post"></div>
+                                    </div>
+                                    <div class="small-3 column">
+                                        <span data-ng-bind="notification.lastupdated"></span>
+                                    </div>
+                                </div>
+                                <div class="row" data-ng-click="openNotification(notification)" id="header_notification_row" data-ng-repeat="notification in notificationsRank" data-ng-show="rankNotificationsVisible">
+                                    <div class="small-2 column comment-avatar">
+                                        <img src="/assets/img/backoffice/avatar.png" alt="{{notification.name}}'s Profile Image'" />
+                                    </div>
+                                    <div class="small-7 column">
+                                        <span data-ng-bind="notification.name"></span>
+                                        <span data-ng-bind="notification.post"></span>
+                                    </div>
+                                    <div class="small-3 column">
+                                        <span data-ng-bind="notification.lastupdated"></span>
+                                    </div>
+                                </div>
+                                <div class="row" data-ng-click="openNotification(notification)" id="header_notification_row" data-ng-repeat="notification in notificationsPeople" data-ng-show="peopleNotificationsVisible">
+                                    <div class="small-2 column comment-avatar">
+                                        <img src="/assets/img/backoffice/avatar.png" alt="{{notification.name}}'s Profile Image'" />
+                                    </div>
+                                    <div class="small-7 column">
+                                        <div data-ng-bind="notification.name"></div>
+                                        <div data-ng-bind="notification.post"></div>
+                                    </div>
+                                    <div class="small-3 column">
+                                        <span data-ng-bind="notification.lastupdated"></span>
+                                    </div>
+                                </div>
+                                <div class="row" data-ng-click="openNotification(notification)" id="header_notification_row" data-ng-repeat="notification in notificationsOrders" data-ng-show="ordersNotificationsVisible">
+                                    <div class="small-2 column comment-avatar">
+                                        <img src="/assets/img/backoffice/avatar.png" alt="{{notification.name}}'s Profile Image'" />
+                                    </div>
+                                    <div class="small-7 column">
+                                        <div data-ng-bind="notification.name"></div>
+                                        <div data-ng-bind="notification.post"></div>
+                                    </div>
+                                    <div class="small-3 column">
+                                        <span data-ng-bind="notification.lastupdated"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer data-ng-controller="NotificationCtrl">
+                        <span data-ng-if="notificationsChat.length > 2 || notificationsRank.length > 2 || notificationsPeople.length > 2 || notificationsOrders.length > 2">
+                            <a href="/notifications">View All</a>
+                        </span>
+                            </footer>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        Hi, <span>Master (Do Not Touch) Developer</span>
+                    </div>
+                </li>
 
-<script>
-    var allTags=[
-        "Compensation Plan","Scientific Study", "Meeting Schedule", "Meeting Agenda", "Directions", "Wish List", "Warning"
-            ];
+
+                <li>
+
+                    <a href="javascript:" data-dropdown="header-languages" data-options="is_hover:false;">
+                        English &nbsp;<i class="fa fa-caret-right"></i>
+                    </a>
+                    <div id="header-languages" data-dropdown-content class="f-dropdown content" aria-hidden="true" tabindex="-1" style="-moz-min-width: 150px !important; -ms-min-width: 150px !important; -o-min-width: 150px !important; -webkit-min-width: 150px !important; min-width: 150px !important;">
+
+                        <ul class="dropdown-body" style="list-style: outside none none;">
+                            <li><a href="/marketing-center?sc_lang=es-MX">Spanish</a></li>
+                        </ul>
+
+                    </div>
+
+                </li>
+                <li class="accent">
+                    <a href="https://office.uplocal.com:443/login" DisableLinkDescription="True" DisableWebEdit="True">
+                        Log Out
+                    </a>
+                </li>
+                <li class="accent">
+                    <a href="https://orders.uplocal.com:443/shopping/basket" DisableLinkDescription="True" DisableWebEdit="True">
+                        <i class="fa fa-shopping-cart"></i><span basket-item-counter>0</span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <section class="top-right-nav">
+            <ul>
+                <li>
+                    <a href="https://orders.uplocal.com:443/shopping/" DisableLinkDescription="True" DisableWebEdit="True">
+                    <span>
+                        Place an Order
+                        <i class="fa fa-chevron-right"></i>
+                    </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://orders.uplocal.com:443/ado-manager" DisableLinkDescription="True" DisableWebEdit="True">
+                    <span>
+                        Manage my ADO
+                        <i class="fa fa-chevron-right"></i>
+                    </span>
+                    </a>
+                </li>
+            </ul>
+
+        </section>
+        <div class="main-logo-nerium show-for-medium-up">&nbsp;</div>
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li id="col-left-toggle" class="left-off-canvas-toggle menu-icon left" style="display: none"><a href="#" onclick="javascript:;;return false;"><span>Left Menu</span></a></li>
+                <li class="name show-for-small-only"><a href="/"><div class="reverse-logo-Nerium">&nbsp;</div></a></li>
+                <li class="toggle-topbar menu-icon"><a href="#" onclick="javascript:;;return false;"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul>
+                    <li class="has-dropdown">
+
+                        <a href="#" DisableLinkDescription="True" onclick="javascript:;;return false;" DisableWebEdit="True">
+                        <span>
+                            My Business
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                        </a>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="/profile##business-overview" DisableLinkDescription="True" DisableWebEdit="True">                                    Leader Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/placement-suite" DisableLinkDescription="True" DisableWebEdit="True">                                    Placement Suite
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/my-commissions" DisableLinkDescription="True" DisableWebEdit="True">                                    My Commissions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.paylution.com/nerium" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">                                    Paylution Payment Center
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/report-center" DisableLinkDescription="True" DisableWebEdit="True">                                    Report Center
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+
+                        <a href="#" DisableLinkDescription="True" onclick="javascript:;;return false;" DisableWebEdit="True">
+                        <span>
+                            Resources
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                        </a>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="https://office.uplocal.com:443/marketing-center" DisableLinkDescription="True" DisableWebEdit="True">                                    Marketing Center
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/conference-calls" DisableLinkDescription="True" DisableWebEdit="True">                                    Conference Calls
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/eight-point-tracker" DisableLinkDescription="True" DisableWebEdit="True">                                    8-Point Tracker
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/settings/nerium-edge" DisableLinkDescription="True" DisableWebEdit="True">                                    Nerium Edge
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/settings/nerium-edge" DisableLinkDescription="True" DisableWebEdit="True">                                    GoSocial
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/settings/nerium-edge" DisableLinkDescription="True" DisableWebEdit="True">                                    CRM Tool
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/settings/nerium-edge" DisableLinkDescription="True" DisableWebEdit="True">                                    Deductr
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/settings/nerium-edge" DisableLinkDescription="True" DisableWebEdit="True">                                    Real Life Library
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+
+                        <a href="#" DisableLinkDescription="True" onclick="javascript:;;return false;" DisableWebEdit="True">
+                        <span>
+                            Training Center
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                        </a>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="https://office.uplocal.com:443/training-center" DisableLinkDescription="True" DisableWebEdit="True">                                    Video Resources
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+
+                        <a href="#" DisableLinkDescription="True" onclick="javascript:;;return false;" DisableWebEdit="True">
+                        <span>
+                            Events
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                        </a>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="https://events.devnerium.com/?SessionID={4c8e9e9b-dc23-4076-891d-cf7b4111e9e6}" DisableLinkDescription="True" DisableWebEdit="True">                                    Events
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+
+                        <a href="#" DisableLinkDescription="True" onclick="javascript:;;return false;" DisableWebEdit="True">
+                        <span>
+                            Recognition
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                        </a>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="https://office.uplocal.com:443/ipad-qualification" DisableLinkDescription="True" DisableWebEdit="True">                                    iPad Qualification
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+
+                        <a href="#" DisableLinkDescription="True" onclick="javascript:;;return false;" DisableWebEdit="True">
+                        <span>
+                            Partners
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                        </a>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="https://office.nerium.com/secure/BBBS.aspx" DisableLinkDescription="True" DisableWebEdit="True">                                    Big Brothers Big Sisters
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+
+
+                        <a href="https://neriumsupport.nerium.com/home" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                        <span>
+                            Support
+                        </span>
+                        </a>
+
+                    </li>
+                </ul>
+
+            </section>
+        </nav>
+    </header>
+
+
+
+    <h2 class="backoffice-left-sidebar-title">
+        [KR]Marketing Center
+    </h2>
+    <section class="left-sidebar inner-wrap" data-ng-controller=ViewItemsCtrl>
+        <div class="col-left-white show-for-small-only left-off-canvas-menu">
+            <div class="small-3column">
+                <div class="backoffice-searchview-items">
+                    Search
+                    <div class="row collapse">
+                        <div class="small-8 large-10 columns">
+                            <input type="text" ng-model="searchText" ng-enter="SearchAssets()" />
+                        </div>
+                        <div class="small-4 large-2 columns">
+                            <a data-ng-click="SearchAssets()" class="button postfix backoffice-anchor">
+                                <i class="fa fa-search fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div><br />
+                <style>
+                    accordion>.panel-group .panel.collapsed .panel-heading .accordion-toggle {
+                        color: #478fca;
+                        font-weight: 400;
+                        background-color: #F9F9F9;
+                    }
+                </style>
+                <div class="row collapse">
+                    <accordion close-others="true">
+                        <accordion-group is-open="isopen"
+                                         data-ng-repeat="cat in categories"
+                                         data-ng-show="categories.length > 0"
+                                         data-ng-change="loadAssets(category.description)">
+                            <accordion-heading>
+                                <div class="row">
+                                    <i class="fa fa-caret-down backoffice-fa-fa-caret" data-ng-click="loadAssets(cat.description)"></i>
+                                    <div class="col-md-3" data-ng-click="loadAssets(cat.description)">
+                                        {{cat.description}}
+                                    </div>
+                                </div>
+                            </accordion-heading>
+                            <div>
+                                <div class="row backoffice-accordion-item"
+                                     data-ng-repeat="subCat in subCategories">
+                                    <div class="col-md-12">
+                                        <div class="row backoffice-row-pad">
+                                <span data-ng-click="loadSubCategoryAssets(subCat.subCategoryDisplayName)"
+                                      data-ng-model="subcategories">{{subCat.subCategoryDisplayName}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+        </div>
+        <div class="col-left-white show-for-medium-up">
+
+            <div class="small-3column">
+                <div class="backoffice-searchview-items">
+                    Search
+                    <div class="row collapse">
+                        <div class="small-8 large-10 columns">
+                            <input type="text" ng-model="searchText" ng-enter="SearchAssets()" />
+                        </div>
+                        <div class="small-4 large-2 columns">
+                            <a data-ng-click="SearchAssets()" class="button postfix backoffice-anchor">
+                                <i class="fa fa-search fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div><br />
+                <style>
+                    accordion>.panel-group .panel.collapsed .panel-heading .accordion-toggle {
+                        color: #478fca;
+                        font-weight: 400;
+                        background-color: #F9F9F9;
+                    }
+                </style>
+                <div class="row collapse">
+                    <accordion close-others="true">
+                        <accordion-group is-open="isopen"
+                                         data-ng-repeat="cat in categories"
+                                         data-ng-show="categories.length > 0"
+                                         data-ng-change="loadAssets(category.description)">
+                            <accordion-heading>
+                                <div class="row">
+                                    <i class="fa fa-caret-down backoffice-fa-fa-caret" data-ng-click="loadAssets(cat.description)"></i>
+                                    <div class="col-md-3" data-ng-click="loadAssets(cat.description)">
+                                        {{cat.description}}
+                                    </div>
+                                </div>
+                            </accordion-heading>
+                            <div>
+                                <div class="row backoffice-accordion-item"
+                                     data-ng-repeat="subCat in subCategories">
+                                    <div class="col-md-12">
+                                        <div class="row backoffice-row-pad">
+                                <span data-ng-click="loadSubCategoryAssets(subCat.subCategoryDisplayName)"
+                                      data-ng-model="subcategories">{{subCat.subCategoryDisplayName}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+        </div>
+        <div class="col-right">
+
+
+            <h1 class="page-content">Marketing Center</h1>
+            <div class="page-content"></div>
+            <div class="page-content"></div>
+
+            <div class="row" >
+                <script>
+                    var assetScroller02bbb87f9ba94aa2903c5e6a9153198b = [
+
+                        {
+                            'description': 'Compensation Plan',
+                            'imageUrl': 'https://office.uplocal.com:443/~/media/asset repository/thumbnail.ashx'
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Test Video Two 2',
+                            'imageUrl': 'https://office.uplocal.com:443/~/media/asset repository/thumbnail.ashx'
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Beautiful You Debut Party Instructions',
+                            'imageUrl': 'https://office.uplocal.com:443/~/media/asset repository/thumbnail2.ashx'
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Canada Regionals',
+                            'imageUrl': 'https://office.uplocal.com:443/~/media/asset repository/thumbnail3.ashx'
+                        }
+                        ,
+
+
+                        {
+                            'description': '3Way Calls',
+                            'imageUrl': 'https://office.uplocal.com:443/~/media/asset repository/thumbnail.ashx'
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Introducing Neriums Scientific Advisory Board',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Nerium Regional Training Powerpoint',
+                            'imageUrl': ''
+                        }
+
+                    ];
+                </script>
+                <horizontal-image-scroller items-object-name="assetScroller02bbb87f9ba94aa2903c5e6a9153198b" viewable-items-length="4" image-height="100" title="Hot Topics" class="small-6 columns"></horizontal-image-scroller>
+                <script>
+                    var assetScroller2a4db724a2c249428854d6778c179df7 = [
+
+                        {
+                            'description': 'Test2',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Corporate Update Call  022415',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Corporate Update Call 021715',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Corporate Update Call  021015',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Team Nerium Conference Call  020115',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Team Nerium Conference Call  020815',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Team Nerium Conference Call 021515',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Test Latest Conference Call',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Test Corporate call225',
+                            'imageUrl': ''
+                        }
+                        ,
+
+
+                        {
+                            'description': 'Test pub',
+                            'imageUrl': ''
+                        }
+
+                    ];
+                </script>
+                <horizontal-image-scroller items-object-name="assetScroller2a4db724a2c249428854d6778c179df7" viewable-items-length="4" image-height="100" title="New Materials" class="small-6 columns"></horizontal-image-scroller>
+
+                <div id="share-modal" class="internal-messaging-share-resource reveal-modal full" data-reveal>
+                    <share-modal modal-id="share-modal"
+                                 title-text="Sharing Asset"
+                                 email-text="E-mail"
+                                 teamcommunicator-text="Team Communicator"
+                                 facebook-text="Facebook"
+                                 from-field-text="From:"
+                                 to-field-text="To:"
+                                 cancel-text="Cancel"
+                                 sendmessage-text="Send Message"
+                                 customer-id="10098"
+                                 customer-email="coolname@mail.com"
+                                 customer-name="Master (Do Not Touch) Developer"></share-modal>
+                </div>
+                <div data-ng-init="init('{17CCDB6B-63CF-49D5-838A-A7463A21DF85}','US English')">
+                    <div class="row backoffice-row-items">
+                        <br />
+                        <div class="row">
+                            <div class="small-8 column">
+                                <div data-ng-show="isLoading"><i class="fa fa-spinner fa-spin"></i>Loading...</div>
+
+                                <div class="row backoffice-row-items">
+                                    <div class="small-12 column">
+                                        <div class="asset-search-no-items-returned" data-ng-show="searchResultsCount==0" data-ng-cloak>No items matched "<span data-ng-bind="failedSearchResultTerm"></span>", please try another tag.</div>
+                                        <div data-ng-repeat="subcategory in visibleAssets" class="backoffice-item-list" ng-cloak>
+                                            <div data-ng-repeat="asset in subcategory.assets" class="row back-office-asset-list-item">
+                                                <div class="small-2 large-2 columns backoffice-asset-thumb">
+                                                    <img class="backoffice-asset-img" data-ng-src="{{asset.thumbnailUri}}" alt="Asset Thumbnail" data-ng-if="asset.thumbnailUri" />
+                                                    <img class="backoffice-asset-img" data-ng-src="//placehold.it/160x90&text=thumbnail+1" alt="Asset Thumbnail" data-ng-if="!asset.thumbnailUri" />
+                                                </div>
+                                                <div class="small-2 large-3 columns back-office-asset-title">
+                                                    <span data-ng-bind="asset.title">No Return Title</span>
+                                                </div>
+                                                <div class="small-6 large-6 columns backoffice-column">
+                                                    <div class="backoffice-asset-list-item-description">
+                                                    <span>
+                                                        <span data-ng-bind="asset.description"></span>
+                                                        <br /><br />
+                                                        <ul class="asset-tags">
+                                                            <li style="list-style-type:none; display:inline-block;">TAGS&nbsp;&nbsp;</li>
+                                                            <b><a><li class="backoffice-asset-tag" style="display:inline-block; text-decoration: none;" data-ng-click="searchByTag(tag.displayName)" data-ng-repeat="tag in asset.tags"><span data-ng-bind="tag.displayName"></span>,&nbsp;</li></a></b>
+                                                        </ul>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <share-preview-download asset="asset" language-code="cultureLang" download-id="{{$parent.$index}}-{{$index}}"></share-preview-download>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="media-modal" class="reveal-modal invisible-modal" data-reveal>
+                        <div id="media-content"></div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+        <a href="#" class="exit-off-canvas" onclick="javascript:;; return false;"></a>
+    </section>
+    <script>
+        window.onload = function () {
+            $("#col-left-toggle").show();
+        }
+    </script>
+
+
+</main>
+<footer>
+
+    <footer>
+        <div class="footer">
+            <div class="footer-primary-nav">
+                <div class="row">
+                    <div class="footer-primary-links small-12 medium-12 large-5 columns">
+                        <ul>
+                            <li>
+                                <a href="https://uplocal.com:443/events" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Events
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://uplocal.com:443/blog" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Blog
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/privacy-policy" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://uplocal.com:443/careers" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Careers
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://uplocal.com:443/returns" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Returns
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/terms-and-conditions" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Terms and Conditions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://uplocal.com:443/emailsignup" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Email Sign Up
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://uplocal.com:443/cancellations" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Cancellations
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://uplocal.com:443/dsa-of-ethics" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    DSA of Ethics
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://uplocal.com:443/faq" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    FAQ
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://uplocal.com:443/spam-policy" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Spam Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://tel:+18001637486" DisableLinkDescription="True" title="Call Nerium" DisableWebEdit="True" target="_blank">
+                                    1-800-1NERIUM (637-486)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://office.uplocal.com:443/policies-and-procedures" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Policies and Procedures
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://neriumsupport.nerium.com/home" DisableLinkDescription="True" DisableWebEdit="True" target="_blank">
+                                    Support
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="country-options small-12 medium-12 large-3 columns right">
+                        <div class="row">
+                            <ul class="countries-list">
+                                <li><a href="http://www.nerium.com">www.nerium.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr class="show-for-medium-only" />
+
+                    <div class="social-network-links medium-9 large-4 columns">
+                        <div class="row">
+                            <span class="hide-for-small subheader medium-3 medium-only-text-right large-12 columns">VISIT US ON:</span>
+
+                            <ul class="small-12 medium-9 large-12 columns">
+                                <li>
+                                    <a href="https://twitter.com/neriumintl/" DisableLinkDescription="True" title="Twitter" DisableWebEdit="True" class="font-icon-twitter" target="_blank">
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/NeriumIntl" DisableLinkDescription="True" title="Facebook" DisableWebEdit="True" class="font-icon-facebook" target="_blank">
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.youtube.com/user/NeriumIntl" DisableLinkDescription="True" title="YouTube" DisableWebEdit="True" class="font-icon-youtube" target="_blank">
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://www.pinterest.com/neriumintl/" DisableLinkDescription="True" title="Pinterest" DisableWebEdit="True" class="font-icon-pinterest" target="_blank">
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://plus.google.com/+NeriumIntl" DisableLinkDescription="True" title="Google" DisableWebEdit="True" class="font-icon-google" target="_blank">
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://www.linkedin.com/company/nerium-international/" DisableLinkDescription="True" title="Linkedin" DisableWebEdit="True" class="font-icon-linkedin" target="_blank">
+
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="copyright right">&#169; 2014 Nerium International.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</footer>
+
+
+<div id="main-modal" class="reveal-modal" data-reveal>
+    <header>
+        <a class="close-reveal-modal">&#215;</a>
+    </header>
+    <div id="modal-content"></div>
+</div>
+<div ng-controller="SessionIdleCtrl">
+    <div id="session-timeout-warning-modal" class="reveal-modal tiny" data-reveal>
+        <header>
+            <span>You have been inactive for more than 15 minutes.</span>
+
+        </header>
+        <div id="modal-content">
+            <p>You will be automatically logged out in <span class="timeout-countdown">{{remaining.minutes}}:{{remaining.seconds}}</span></p>
+            <p>Select CONTINUE to return to your session, or LOGOUT to end the session.</p>
+            <button type="button" class="accent left" ng-click="continue()">Continue</button><button ng-click="logout()" class="timeout-logout right white-background" type="button">LOGOUT</button>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/vendor/spin/spin.js"></script>
+<script src="/assets/vendor/foundation/js/foundation.js"></script>
+<script src="/assets/vendor/foundation/js/foundation/foundation.equalizer.js"></script>
+<script src="/assets/vendor/foundation/js/foundation/foundation.alert.js"></script>
+<script src="/assets/vendor/angular.js"></script>
+<script src="/assets/vendor/angular-resource.js"></script>
+<script src="/assets/vendor/angular-foundation/mm-foundation.js"></script>
+<script src="/assets/vendor/ng-infinite-scroll.min.js"></script>
+<script src="/assets/vendor/angular-local-storage/angular-local-storage.js"></script>
+<script src="/assets/vendor/qtip2/jquery.qtip.js"></script>
+<script src="/assets/vendor/moment/moment-with-locales.js"></script>
+<script src="/assets/vendor/angular-http-loader/angular-http-loader.js"></script>
+<script src="/assets/vendor/modernizr/modernizr.js"></script>
+<script src="/assets/vendor/print/jQuery.print.js"></script>
+<script src="/assets/js/shared/social-media-share.js"></script>
+<script src="/assets/vendor/twitter/widgets.js"></script>
+<script src="/assets/vendor/numberInput.min.js"></script>
+<script src="/assets/vendor/combodate.js"></script>
+
+<script src="/assets/vendor/TeaLeaf/Tealeaf.js"></script>
+<script src="/assets/vendor/ng-idle-master/angular-idle.js"></script>
+
+<script src="/assets/vendor/ResponsivePath/angular.unobtrusive.validation.js"></script>
+<script src="/assets/js/ebiz/angular-animate.js"></script>
+<script src="/assets/js/backoffice/popover.js"></script>
+<script src="/assets/js/backoffice/flipclock.min.js"></script>
+<script src="/assets/js/backoffice/main.js"></script>
+<script src="/assets/vendor/ng-idle-master/angular-idle.js"></script>
+<script src="/assets/vendor/jdmLoadingIndicator/jdmLoadingIndicator.js"></script>
+<script src="/assets/vendor/angular-unsavedChanges/unsavedChanges.js"></script>
+<script src="/assets/vendor/Chart.min.js"></script>
+<script src="/assets/vendor/angles.js"></script>
+<script src="/assets/vendor/angular-sanitize.js"></script>
+<script src="/assets/vendor/angular-foundation/mm-foundation-tpls.js"></script>
+<script src="/assets/vendor/foundation/js/foundation/foundation.offcanvas.js"></script>
+<script src="/assets/vendor/foundation/js/foundation/foundation.accordion.js"></script>
+<script src="/assets/vendor/CKEditor/ckeditor.js"></script>
+<script src="/assets/vendor/angular-ui-select.js"></script>
+<script src="/assets/vendor/angular-upload.js"></script>
+<script src="/Nerium.BackOffice/app/app.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/activityFeedCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/communicationCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/contactProfileCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/downlineMenuCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/eightPointTrackerCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/getRealCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/goalsProfileCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/headerProfileMenuCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/locationsProfileCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/messagesCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/myCommissionsCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/notificationCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/paymentCardsCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/personalInformationCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/placementSuiteCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/profileHeaderCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reportPeriodSelectorCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/sessionIdleCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/sponsorTreeChartsCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/userDetailsCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/assetRepository/categoryListCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/assetRepository/hotTopicsCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/assetRepository/testctrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/assetRepository/viewItemCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/assetRepository/viewItemsCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/basketSummaryCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/reviewShoppingBasketCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/shoppingBasketCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/shoppingProductDetailCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/shoppingProductListCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/checkout/billingCheckoutCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/checkout/checkoutCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/checkout/prospectProductAddressListingCrtl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/checkout/shippingCheckoutCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/prospect/prospectAddressCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/prospect/prospectCheckoutCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/prospect/prospectContinueCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/prospect/korea/orderDetailsKrCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/prospect/korea/prospectDaumAddressCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/upgrade/autoDeliveryOrderDetailsCtr.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/upgrade/bpUpgradeCtrl%20.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/upgrade/brandPartnerUpgradeCtrl%20.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/upgrade/brandPartnerUpgradeCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/upgrade/enrollmentAdoCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/upgrade/enrollmentDetailsCtr.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/upgrade/enrollmentOrderDetailsCtr.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/commerce/upgrade/UpgradeDetailsCtr.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/Messaging/internalMessagingCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/adoTrackerReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/advReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/bonusCommissionsReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/fsqTrackerReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/gqvReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/iPadReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/lexusTrackerReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/myTeamReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/neriumEdgeTrackerReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/personallySponsoredCustomersReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/personallySponsoredReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/personalNewStartsReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/placementSuiteReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/pqvReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/rankAdvancementReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/recentOrdersReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/teamNewStartsReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/volumesReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/volumeTrackerReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/reportCenter/bpsInTeamWithNewPcsCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/reportCenter/customReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/reportCenter/newReportCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/reportCenter/reportMessagingCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/reportCenter/reportViewerCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/reportCenter/savedReportsCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/reports/reportCenter/teamNewStartsReportCenterCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/givesBackCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/profileCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/settingsLoginCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/Profile/profileAboutMeCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/Profile/profileContactCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/Profile/profilePersonalInfoCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/Profile/profilePicCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/Profile/profilePrimaryAddressCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/Profile/profileSocialCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/settings/Profile/profileWebsiteInfoCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/adoTrackerWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/advWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/commissionWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/DirectDepositWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/fsqWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/gqvTrackerCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/gqvWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/iPadQualificationsWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/lexusCarBonusWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/marketingDriversWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/marketingGaugesWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/newStartTrackerWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/personallySponsoredWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/pqvWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/rankAdvancementWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/rankQualificationModalCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/recentOrdersWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/subscriptionHistoryWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/threeURFreeWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/controllers/widgets/volumesWidgetCtrl.js"></script>
+<script src="/Nerium.BackOffice/app/directives/addressSuggestion.js"></script>
+<script src="/Nerium.BackOffice/app/directives/assetListDirective.js"></script>
+<script src="/Nerium.BackOffice/app/directives/calendarPicker.js"></script>
+<script src="/Nerium.BackOffice/app/directives/conferenceCalls.js"></script>
+<script src="/Nerium.BackOffice/app/directives/customReportFilter.js"></script>
+<script src="/Nerium.BackOffice/app/directives/dateRangePicker.js"></script>
+<script src="/Nerium.BackOffice/app/directives/expander.js"></script>
+<script src="/Nerium.BackOffice/app/directives/formsValidation.js"></script>
+<script src="/Nerium.BackOffice/app/directives/foundationModalRichTextEditor.js"></script>
+<script src="/Nerium.BackOffice/app/directives/horizontalImageScroller.js"></script>
+<script src="/Nerium.BackOffice/app/directives/languageDownload.js"></script>
+<script src="/Nerium.BackOffice/app/directives/neriumMultiSelect.js"></script>
+<script src="/Nerium.BackOffice/app/directives/ngEnter.js"></script>
+<script src="/Nerium.BackOffice/app/directives/passwordMatch.js"></script>
+<script src="/Nerium.BackOffice/app/directives/phoneNumber.js"></script>
+<script src="/Nerium.BackOffice/app/directives/printDiv.js"></script>
+<script src="/Nerium.BackOffice/app/directives/richTextEditor.js"></script>
+<script src="/Nerium.BackOffice/app/directives/serverMessage.js"></script>
+<script src="/Nerium.BackOffice/app/directives/sharePreviewDownload.js"></script>
+<script src="/Nerium.BackOffice/app/directives/siteLanguageSelector.js"></script>
+<script src="/Nerium.BackOffice/app/directives/toggle.js"></script>
+<script src="/Nerium.BackOffice/app/directives/treeNode.js"></script>
+<script src="/Nerium.BackOffice/app/directives/commerce/addToProspectBasket.js"></script>
+<script src="/Nerium.BackOffice/app/directives/commerce/basketItemCounter.js"></script>
+<script src="/Nerium.BackOffice/app/directives/commerce/cardExpiration.js"></script>
+<script src="/Nerium.BackOffice/app/directives/commerce/miniOrderDetails.js"></script>
+<script src="/Nerium.BackOffice/app/directives/commerce/removeBasketItem.js"></script>
+<script src="/Nerium.BackOffice/app/directives/commerce/updateBasketItem.js"></script>
+<script src="/Nerium.BackOffice/app/directives/Messaging/conversationDirective.js"></script>
+<script src="/Nerium.BackOffice/app/directives/Messaging/message.js"></script>
+<script src="/Nerium.BackOffice/app/directives/Messaging/shareModalDirective.js"></script>
+<script src="/Nerium.BackOffice/app/directives/Messaging/viewAllMessagesDirective.js"></script>
+<script src="/Nerium.BackOffice/app/filters/dateFilter.js"></script>
+<script src="/Nerium.BackOffice/app/filters/nameFilter.js"></script>
+<script src="/Nerium.BackOffice/app/filters/numberRangeFilter.js"></script>
+<script src="/Nerium.BackOffice/app/filters/orderObjectBy.js"></script>
+<script src="/Nerium.BackOffice/app/filters/phoneFilter.js"></script>
+<script src="/Nerium.BackOffice/app/filters/propsFilter.js"></script>
+<script src="/Nerium.BackOffice/app/models/addressModel.js"></script>
+<script src="/Nerium.BackOffice/app/models/changeUserPasswordRequest.js"></script>
+<script src="/Nerium.BackOffice/app/models/commissionPeriodList.js"></script>
+<script src="/Nerium.BackOffice/app/models/commissions.js"></script>
+<script src="/Nerium.BackOffice/app/models/communication.js"></script>
+<script src="/Nerium.BackOffice/app/models/customerSiteDto.js"></script>
+<script src="/Nerium.BackOffice/app/models/downlineNotification.js"></script>
+<script src="/Nerium.BackOffice/app/models/edgeSubscriber.js"></script>
+<script src="/Nerium.BackOffice/app/models/eventBadge.js"></script>
+<script src="/Nerium.BackOffice/app/models/gqvDetail.js"></script>
+<script src="/Nerium.BackOffice/app/models/myCommissionBonuses.js"></script>
+<script src="/Nerium.BackOffice/app/models/myCommissionDetails.js"></script>
+<script src="/Nerium.BackOffice/app/models/notification.js"></script>
+<script src="/Nerium.BackOffice/app/models/profile.js"></script>
+<script src="/Nerium.BackOffice/app/models/assetRepository/asset.js"></script>
+<script src="/Nerium.BackOffice/app/models/assetRepository/assetListItem.js"></script>
+<script src="/Nerium.BackOffice/app/models/assetRepository/category.js"></script>
+<script src="/Nerium.BackOffice/app/models/assetRepository/countryLanguage.js"></script>
+<script src="/Nerium.BackOffice/app/models/assetRepository/hotTopic.js"></script>
+<script src="/Nerium.BackOffice/app/models/assetRepository/subCategoryAssets.js"></script>
+<script src="/Nerium.BackOffice/app/models/commerce/adoProductModel.js"></script>
+<script src="/Nerium.BackOffice/app/models/commerce/basketModel.js"></script>
+<script src="/Nerium.BackOffice/app/models/commerce/billingInfo.js"></script>
+<script src="/Nerium.BackOffice/app/models/commerce/billingInfoModel.js"></script>
+<script src="/Nerium.BackOffice/app/models/commerce/orderModel.js"></script>
+<script src="/Nerium.BackOffice/app/models/commerce/productModel.js"></script>
+<script src="/Nerium.BackOffice/app/models/commerce/shippingInfoModel.js"></script>
+<script src="/Nerium.BackOffice/app/models/messaging/conversationDto.js"></script>
+<script src="/Nerium.BackOffice/app/models/messaging/conversationMessage.js"></script>
+<script src="/Nerium.BackOffice/app/models/messaging/conversationMessages.js"></script>
+<script src="/Nerium.BackOffice/app/models/messaging/conversationParticipants.js"></script>
+<script src="/Nerium.BackOffice/app/models/messaging/viewAllMessages.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/adoTrackerDetail.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/adv.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/bonusCommissionsDetail.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/bpsInTeamWithNewPcs.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/customReportResult.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/downline.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/fsqDetail.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/fsqTeam.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/gqvOverview.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/iPadQualifications.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/lexusQualification.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/myTeam.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/neriumEdgeTrackerDetail.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/personallySponsored.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/personallySponsoredCustomers.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/placementSuite.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/pqv.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/rankAdvancementDetail.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/rankQualificationDetail.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/ranksList.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/recentOrders.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/report.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/reportColumn.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/reportColumnGroup.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/reportFilter.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/reportFilterCondition.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/reportFilterValue.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/reportFilterValueCategory.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/reportProperty.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/reportTree.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/teamNewStartDetail.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/volumeHistory.js"></script>
+<script src="/Nerium.BackOffice/app/models/reports/volumeTracker.js"></script>
+<script src="/Nerium.BackOffice/app/models/settings/customer.js"></script>
+<script src="/Nerium.BackOffice/app/models/settings/givesBack.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/adoTracker.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/fsq.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/gqvTracker.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/iPadQualificationsWidgetDetail.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/lexusCarBonus.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/marketingDrivers.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/marketingGauge.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/newStartTracker.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/personallySponsored.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/rank.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/rankQualificationsModal.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/subscriptionHistory.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/threeURFree.js"></script>
+<script src="/Nerium.BackOffice/app/models/widgets/volume.js"></script>
+<script src="/Nerium.BackOffice/app/services/assetSelectorService.js"></script>
+<script src="/Nerium.BackOffice/app/services/checkoutService.js"></script>
+<script src="/Nerium.BackOffice/app/services/communicationService.js"></script>
+<script src="/Nerium.BackOffice/app/services/customerApi.js"></script>
+<script src="/Nerium.BackOffice/app/services/daumService.js"></script>
+<script src="/Nerium.BackOffice/app/services/geoService.js"></script>
+<script src="/Nerium.BackOffice/app/services/getDataApi.js"></script>
+<script src="/Nerium.BackOffice/app/services/modalApi.js"></script>
+<script src="/Nerium.BackOffice/app/services/postApi.js"></script>
+<script src="/Nerium.BackOffice/app/services/searchViewItemsService.js"></script>
+<script src="/Nerium.BackOffice/app/services/utilService.js"></script>
+<script src="/Nerium.BackOffice/app/services/commerce/adoService.js"></script>
+<script src="/Nerium.BackOffice/app/services/commerce/basketService.js"></script>
+<script src="/Nerium.BackOffice/app/services/commerce/basketSummaryService.js"></script>
+<script src="/Nerium.BackOffice/app/services/commerce/checkoutService.js"></script>
+<script src="/Nerium.BackOffice/app/services/commerce/creditCardService.js"></script>
+<script src="/Nerium.BackOffice/app/services/commerce/enrollmentService.js"></script>
+<script src="/Nerium.BackOffice/app/services/commerce/prospectBasketService.js"></script>
+
+<script type="text/javascript">
+    app.factory('webConfig', [function () {
+        var appSettings = {
+            digOpsApiUrl: '/api',
+            myNeriumUrl: 'https://www.mynerium.biz/SponsorReport/UniLevelReporting.aspx',
+            sessionTimeoutMinutes: '5'
+        };
+
+        return appSettings;
+    }]);
+
+    app.factory('profileSettings', [function () {
+        var profileSettings = {
+            sessionId: '{4c8e9e9b-dc23-4076-891d-cf7b4111e9e6}',
+            countryCode: 'US',
+            culture: 'en-US', // UI culture code
+            language: 'en', // BP culture code
+            funnelId: ''
+        };
+
+        return profileSettings;
+    }]);
 </script>
-<h1>Tag Search Prototype</h1>
-
-<hr>
-<tag-search></tag-search>
-
-<horizontal-image-scroller items-object-name="myObj1x" viewable-items-length="1" image-height="100" title="Hot Topics"></horizontal-image-scroller >
-<hr>
-<horizontal-image-scroller items-object-name="myObj" viewable-items-length="4" image-height="100" title="Hot Topics"></horizontal-image-scroller >
-<hr>
-<br/>
-<span style="position: inherit; display: inline-block;width:400px;height:200px;">
-    <horizontal-image-scroller items-object-name="myObj" viewable-items-length="2" image-height="50" title="Hot Topics"></horizontal-image-scroller >
-</span>
-<span style="position: inherit; display: inline-block;width:400px;height:200px;">
-    <horizontal-image-scroller items-object-name="myObj1" viewable-items-length="2" image-height="50" title="Hot Topics"></horizontal-image-scroller >
-</span> abc
 
 
-<!-- ISOLATED UI DEV VENDOR SCRIPTS START -->
-<script src="vendor_local/jquery.min.js"></script>
-<script src="vendor_local/angular.js"></script>
-<script src="vendor_local/angular-animate.js"></script>
-<!-- ISOLATED UI DEV VENDOR SCRIPTS END -->
+<script src="/assets/vendor/angular-ng-locale/angular-locale_en-us.js" type="text/javascript"></script>
 
-
-<!-- APPLICATION SCRIPTS START -->
-<script src="app.js"></script>
-<script src="horizontalImageScroller.directive.js"></script>
-<!-- APPLICATION SCRIPTS END -->
-
+<script src="/Nerium.BackOffice/app/controllers/sessionIdleCtrl.js"></script>
 
 </body>
 </html>
