@@ -39,7 +39,7 @@
                         return {"min-height":tallestHeight+"px"};
                     }
 
-                    scp.descriptionHeight=$timeoutgetMaxDescriptionHeight();
+                    //scp.descriptionHeight=$timeoutgetMaxDescriptionHeight();
 
                     scp.visibleItems = [];
                     for (var i = 0; i < visibleItemsLength; i++) {
