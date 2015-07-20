@@ -4,9 +4,11 @@
     <!--WIDGET TITLE-->
     <span class="widget-title" ng-bind="widgetitem.VarName"></span>
 
-    <!--WIDGET BODY-->
+
+{{widgetitem.size.x}}
+
 
     <span ng-bind="widgetitem.payload.VarName"></span>
-    <span ng-bind="widgetitem.payload.ShortDescription"></span>
-{{widgetitem}}
+    <hr>
+    {{widgetitem}}
 </span>
