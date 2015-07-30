@@ -4,7 +4,10 @@
     angular.module('app').directive('bloomingMenu', function(){
         return{
             restrict:'E',
-            templateUrl:"bloomingMenu.directive.html"
+            templateUrl:"bloomingMenu.template.html",
+            link:function(scp,el,attr){
+                scp.active=true;
+            }
         }
     });
 

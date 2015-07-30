@@ -1,0 +1,70 @@
+.blooming-menu-container-inactive {
+
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  opacity:0.5;
+  background-color: #fff2a1;
+  height:100px;
+
+}
+
+.blooming-menu-container-active{
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  opacity:0.5;
+  background-color: #3dff23;
+  top: 50px;
+
+}
+
+.l5{
+ background-color: indianred;
+  position:absolute;
+  display:inline-block;
+  top:20%;
+  bottom:0;
+  left:0;
+  right:0;
+}
+
+.l4{
+  background-color: #6d3131;
+  position:absolute;
+  display:inline-block;
+  top:20%;
+  bottom:0;
+  left:2%;
+  right:0;
+}
+
+.l3{
+  background-color: #6d2454;
+  position:absolute;
+  display:inline-block;
+  top:20%;
+  bottom:0;
+  left:20%;
+  right:0;
+}
+
+.lhide{
+
+}
+
+.blooming-menu-container-menu-text {
+  color: red;
+  font-weight:bold;
+  font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+  bottom: 0;
+  right: 0;
+  opacity:1;
+  position:absolute;
+}
