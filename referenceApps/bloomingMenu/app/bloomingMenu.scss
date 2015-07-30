@@ -6,12 +6,7 @@
 
   right: 0;
 
-  opacity:0.5;
-  background-color: #fff2a1;
-  max-height: 200px;
-  min-height: 150px;
-  height:20%;
-  width:200px;
+  opacity:1.0;
 }
 
 .blooming-menu-container-active{
@@ -22,63 +17,63 @@
   right: 0;
 
   opacity:1;
-  background-color: #3dff23;
-  top: 50px;
+
+  //top: 50px;
 
 }
 
 .l5{
- background-color: indianred;
-  position:absolute;
-  display:inline-block;
-  top:20%;
-  bottom:0;
-  left:0;
-  right:0;
+  border-radius: 50%;
+  width:3200px;
+  height: 3200px;
+  background-color: #f40001;
+  position:fixed;
+  bottom:-1545px;
+  right:-1545px;
 }
 
 .l4{
-  background-color: #6d3131;
-  position:absolute;
-  display:inline-block;
-  top:20%;
-  bottom:0;
-  left:2%;
-  right:0;
+  border-radius: 50%;
+  width:2500px;
+  height: 2500px;
+  background-color: #e10001;
+  position:fixed;
+  bottom:-1185px;
+  right:-1185px;
 }
 
+
 .l3{
- border:1px solid grey;
-  position:absolute;
-  display:inline-block;
-  top:20%;
-  bottom:0;
-  left:20%;
-  right:0;
-  background-image: url("data:image/svg+xml;utf8,<svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'> <g> <circle fill='#F40001' cx='85%' cy='85%' r='80%' id='svg_1'/> </g> </svg>");
+  border-radius: 50%;
+  width:1800px;
+  height: 1800px;
+  background-color: #cb0001;
+  position:fixed;
+  bottom:-845px;
+  right:-845px;
 }
 
 .l2{
-  border:1px solid grey;
-  position:absolute;
-  display:inline-block;
-  top:20%;
-  bottom:0;
-  left:20%;
-  right:0;
-  background-image: url("data:image/svg+xml;utf8,<svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'> <g> <circle fill='#D60001' cx='85%' cy='85%' r='80%' id='svg_1'/> </g> </svg>");
+
+  border-radius: 50%;
+  width:1050px;
+  height: 1050px;
+  background-color: #b30001;
+  position:fixed;
+  bottom:-460px;
+  right:-460px;
 }
 
 
 .l1{
-  border:1px solid #bf0001;
-  position:absolute;
-  display:inline-block;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  background-image: url("data:image/svg+xml;utf8,<svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'> <g> <circle fill='#BF0001' cx='80%' cy='80%' r='75%' id='svg_1'/> </g> </svg>");
+
+  border-radius: 50%;
+  width:300px;
+  height: 300px;
+  background-color: #930001;
+  position:fixed;
+  bottom:-85px; // -65
+  right:-85px;
 }
 .lhide{
 
@@ -86,11 +81,38 @@
 
 .blooming-menu-container-menu-text {
   color: white;
-  font-size: 4rem;
-  font-weight:bold;
+  font-size: 3.5rem;
+
   font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
-  bottom: 10px;
-  right: 0;
+  bottom: 40px;
+  right: 20px;
   opacity:1;
   position:absolute;
+}
+
+
+.button-container{
+  display: inline-block;
+  position: fixed;
+  top: 300px;
+
+  right: 0;
+  width: 500px;
+  font-size: 2rem;
+  font-family: sans-serif;
+
+}
+
+.button-container-button{
+  display: block;
+  height:100px;
+  margin:3px;
+  opacity:.5;
+  background-color: darkred;
+}
+
+.button-container-button-text{
+  color:white;
+  opacity:1;
+
 }
