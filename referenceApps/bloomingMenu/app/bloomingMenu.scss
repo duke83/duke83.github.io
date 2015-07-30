@@ -19,7 +19,7 @@
   left: 0;
   right: 0;
 
-  opacity:0.5;
+  opacity:1;
   background-color: #3dff23;
   top: 50px;
 
@@ -46,21 +46,45 @@
 }
 
 .l3{
-  background-color: #6d2454;
+ border:1px solid grey;
   position:absolute;
   display:inline-block;
   top:20%;
   bottom:0;
   left:20%;
   right:0;
+  background-image: url("data:image/svg+xml;utf8,<svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'> <g> <circle fill='#F40001' cx='85%' cy='85%' r='80%' id='svg_1'/> </g> </svg>");
 }
 
+.l2{
+  border:1px solid grey;
+  position:absolute;
+  display:inline-block;
+  top:20%;
+  bottom:0;
+  left:20%;
+  right:0;
+  background-image: url("data:image/svg+xml;utf8,<svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'> <g> <circle fill='#D60001' cx='85%' cy='85%' r='80%' id='svg_1'/> </g> </svg>");
+}
+
+
+.l1{
+  border:1px solid grey;
+  position:absolute;
+  display:inline-block;
+  top:20%;
+  bottom:0;
+  left:20%;
+  right:0;
+  background-image: url("data:image/svg+xml;utf8,<svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'> <g> <circle fill='#BF0001' cx='80%' cy='80%' r='50%' id='svg_1'/> </g> </svg>");
+}
 .lhide{
 
 }
 
 .blooming-menu-container-menu-text {
-  color: red;
+  color: white;
+  font-size: 4rem;
   font-weight:bold;
   font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
   bottom: 0;
