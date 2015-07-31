@@ -1,39 +1,47 @@
 <span ng-class="active?'blooming-menu-container-active':'blooming-menu-container-inactive'">
+
+    <!--TWO DOM SIBLINGS. FIRST IS A LAYER THAT WILL FULLY COVER UNDERLYING PAGE AND MAKE IT PARTIALLY OPAQUE-->
+    <span ng-class="active?'layer0-active':'layer0-inactive'"></span>
+
+
+    <!--SECOND, IS A LAYER THAT IS FULLY OPAQUE-->
+
+    <!--BLOOMING CONENTRIC CIRCLES-->
     <span ng-class="active?'l5':'lhide'"></span>
-        <span ng-class="active?'l4':'lhide'"></span>
-            <span ng-class="active?'l3':'lhide'"></span>
-                <span ng-class="active?'l2':'lhide'"></span>
-                    <span class="l1">
+    <span ng-class="active?'l4':'lhide'"></span>
+    <span ng-class="active?'l3':'lhide'"></span>
+    <span ng-class="active?'l2':'lhide'"></span>
+    <span class="l1"></span>
+    <!--THIS IS THE BOTTOM RIGHT CIRCLE THAT ALWAYS SHOWS-->
+    <span ng-click="active=!active" class="blooming-menu-container-menu-text" ng-bind="active?'close':'menu'"></span>
 
-                    </span>
- <span ng-click="active=!active" class="blooming-menu-container-menu-text" ng-bind="active?'close':'menu'"></span>
+    <!--THIS IS THE MENU THAT FLIES IN FROM RIGHT-->
+    <span class="buttons-all"  ng-class="active?'buttons-all':'buttons-all-inactive'">
 
-<span class="buttons-all"  ng-class="{'lhide':!active}">
+        <!--THIS IS THE LAYER FOR BUTTONS THAT ARE PARTIALLY TRANSPARENT-->
+        <span class="button-container">
+            <span class="button-container-button" ng-click="selectme()">HOME</span>
+            <span class="button-container-button" ng-click="selectme()">MY DASHBOARD</span>
+            <span class="button-container-button" ng-click="selectme()">MY PLAN</span>
+            <span class="button-container-button" ng-click="selectme()">FIND CARE</span>
+            <span class="button-container-button" ng-click="selectme()">CONTACT US</span>
+        </span>
 
-    <span class="button-container">
-        <span class="button-container-button">HOME</span>
-        <span class="button-container-button">MY DASHBOARD</span>
-        <span class="button-container-button">MY PLAN</span>
-        <span class="button-container-button">FIND CARE</span>
-        <span class="button-container-button">CONTACT US</span>
+        <!--THIS IS THE LAYER IDENTICAL TO ABOVE LAYER THAT SHOWS TOTALLY NON-TRANSPARENT TEXT-->
+        <span class="button-container" >
+            <span class="button-container-text">HOME</span>
+            <span class="button-container-text">MY DASHBOARD</span>
+            <span class="button-container-text">MY PLAN</span>
+            <span class="button-container-text">FIND CARE</span>
+            <span class="button-container-text">CONTACT US</span>
+        </span>
+
+        <!--THIS IS CONTAINER FOR FLOATING LINKS -->
+        <span class="non-button-button-container">
+            <span class="non-button-button-text">My Account</span>
+            <span class="non-button-button-text">About us</span>
+            <span class="non-button-button-text">Log out</span>
+        </span>
 
     </span>
-
-
-    <span class="button-container" >
-        <span class="button-container-text">HOME</span>
-        <span class="button-container-text">MY DASHBOARD</span>
-        <span class="button-container-text">MY PLAN</span>
-        <span class="button-container-text">FIND CARE</span>
-        <span class="button-container-text">CONTACT US</span>
-
-    </span>
-
-    <span class="non-button-button-container">
-        <span class="non-button-button-text">My Account</span>
-        <span class="non-button-button-text">About us</span>
-        <span class="non-button-button-text">Log out</span>
-    </span>
-
-</span>
 </span>

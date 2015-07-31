@@ -1,94 +1,104 @@
 .blooming-menu-container-inactive {
 
-  z-index: 10;
+  z-index: 9;
   position: fixed;
   bottom: 0;
 
   right: 0;
-
-  opacity:1.0;
+  opacity: 1.0;
 }
 
-.blooming-menu-container-active{
+.blooming-menu-container-active {
+  background-color: white;
   z-index: 10;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-
-  opacity:1;
-
-  //top: 50px;
-
+  transition: 1s linear opactity;
 }
 
-.l5{
+.layer0-active {
+  position: fixed;
+  background-color: #ffffff;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: block;
+  opacity: .4;
+  transition:1s linear all;
+}
+
+.layer0-inactive {
+display:none;
+}
+
+.l5 {
   border-radius: 50%;
-  width:3200px;
+  width: 3200px;
   height: 3200px;
   background-color: #fc5e3c;
-  position:fixed;
-  bottom:-1545px;
-  right:-1545px;
+  position: fixed;
+  bottom: -1545px;
+  right: -1545px;
 
-  transition: .4s linear opacity;
+  //transition: .2s linear opacity;
   transition-delay: .6s;
 }
 
-
-.l4{
+.l4 {
   border-radius: 50%;
-  width:2500px;
+  width: 2500px;
   height: 2500px;
   background-color: #ee5030;
-  position:fixed;
-  bottom:-1185px;
-  right:-1185px;
+  position: fixed;
+  bottom: -1185px;
+  right: -1185px;
 
-  transition: .5s linear opacity;
-  transition-delay: .4s;
+  //transition: .2s linear opacity;
+  transition-delay: .3s;
 }
 
-
-.l3{
+.l3 {
   border-radius: 50%;
-  width:1800px;
+  width: 1800px;
   height: 1800px;
   background-color: #d84223;
-  position:fixed;
-  bottom:-845px;
-  right:-845px;
+  position: fixed;
+  bottom: -845px;
+  right: -845px;
 
-  transition: .5s linear opacity;
+  //transition: .2s linear opacity;
   transition-delay: .1s;
 }
 
-.l2{
+.l2 {
 
   border-radius: 50%;
-  width:1050px;
+  width: 1050px;
   height: 1050px;
   background-color: #ce3b1d;
-  position:fixed;
-  bottom:-460px;
-  right:-460px;
+  position: fixed;
+  bottom: -460px;
+  right: -460px;
 
-  transition: .2s linear opacity;
+  //transition: .2s linear opacity;
 
 }
 
-
-.l1{
+.l1 {
 
   border-radius: 50%;
-  width:300px;
+  width: 300px;
   height: 300px;
   background-color: #b22d12;
-  position:fixed;
-  bottom:-85px; // -65
-  right:-85px;
+  position: fixed;
+  bottom: -85px; // -65
+  right: -85px;
 }
-.lhide{
+
+.lhide {
   //display:none!important;
   opacity: 0;
   //visibility:hidden;
@@ -101,28 +111,29 @@
   font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
   bottom: 40px;
   right: 20px;
-  opacity:1;
-  position:absolute;
+  opacity: 1;
+  position: absolute;
   transition: 1s position;
 }
 
-.buttons-all{
-  background-color: lime;
+.buttons-all {
+  ///background-color: lime;
   position: fixed;
   top: 280px;
   left: 400px;
   display: inline-block;
   height: 1200px;
   right: 0;
-  transition:1s linear all;
-  }
-.buttons-all-inactive{
-  position:fixed;
-  left:800px;
+  transition: 1s linear all;
+}
+
+.buttons-all-inactive {
+  position: fixed;
+  left: 1100px;
 
 }
 
-.button-container{
+.button-container {
   font-size: 2.5rem;
   font-weight: 300;
   font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
@@ -130,34 +141,38 @@
   top: 0;
   right: 0;
   left: 0;
-
+  pointer-events: none;
 }
 
-
-.button-container-button{
+.button-container-button {
 
   display: block;
-  height:110px;
-  margin:5px;
-  opacity:.5;
-  background-color: #8B0000;
-  color:transparent;
+  height: 110px;
+  margin: 5px;
+  opacity: .7;
+  background-color: #655050;
+  color: transparent;
   padding-top: 70px;
-  padding-left:70px;
+  padding-left: 70px;
 }
 
-.button-container-text{
+.selected-button{
+  background-color:lime;
+}
+
+.button-container-text {
   display: block;
-  height:110px;
-  margin:5px;
-  opacity:1;
+  height: 110px;
+  margin: 5px;
+  opacity: 1;
   background-color: transparent;
-  color:white;
+  color: white;
   padding-top: 70px;
-  padding-left:70px;
+  padding-left: 70px;
+  pointer-events: none;
 }
 
-.non-button-button-container{
+.non-button-button-container {
   display: inline-block;
   position: absolute;
   top: 960px;
@@ -168,7 +183,7 @@
   font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
 }
 
-.non-button-button-text{
+.non-button-button-text {
   display: block;
   height: 50px;
   margin: 5px;
