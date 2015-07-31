@@ -5,15 +5,16 @@
         return{
             restrict:'E',
             templateUrl:"bloomingMenu.template.html",
-            link:function(scp,el,attr){
-                scp.active=true;
-
-                el.on('click',function(){
-                    el.addClass('selected-button')
-                })
-                scp.selecteme=function(){
-                   console.log(el)
+            controller:function($scope){
+                $scope.selectme=function(btnText){
+                    console.log(btnText)
                 }
+            },
+            link:function(scp,el,attr){
+                scp.active=false;
+
+
+
             }
         }
     });

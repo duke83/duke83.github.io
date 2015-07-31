@@ -36,7 +36,7 @@
   position: fixed;
   bottom: -1545px;
   right: -1545px;
-  transition-delay: .6s; }
+  transition-delay: .5s; }
 
 .l4 {
   border-radius: 50%;
@@ -109,8 +109,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  left: 0;
-  pointer-events: none; }
+  left: 0; }
 
 .button-container-button {
   display: block;
@@ -133,8 +132,7 @@
   background-color: transparent;
   color: white;
   padding-top: 70px;
-  padding-left: 70px;
-  pointer-events: none; }
+  padding-left: 70px; }
 
 .non-button-button-container {
   display: inline-block;
