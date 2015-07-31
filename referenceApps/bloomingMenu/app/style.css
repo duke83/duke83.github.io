@@ -1,0 +1,9 @@
+.positioned-content {
+  display: inline-block;
+  background-color: lightgray;
+  color: grey;
+  margin: 20px;
+  position: absolute;
+  overflow: scroll; }
+
+/*# sourceMappingURL=style.css.map */
