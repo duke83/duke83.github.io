@@ -1,3 +1,5 @@
+//the blooming-menu directive is ALWAYS visible.  Even when it is 'inactive' the button still
+//shows in lower right corner.
 <span ng-class="active?'blooming-menu-container-active':'blooming-menu-container-inactive'">
 
     <!--TWO DOM SIBLINGS. FIRST IS A LAYER THAT WILL FULLY COVER UNDERLYING PAGE AND MAKE IT PARTIALLY OPAQUE-->
@@ -7,34 +9,39 @@
     <!--SECOND, IS A LAYER THAT IS FULLY OPAQUE-->
 
     <!--BLOOMING CONENTRIC CIRCLES-->
-    <span ng-class="active?'l5':'lhide'"></span>
-    <span ng-class="active?'l4':'lhide'"></span>
-    <span ng-class="active?'l3':'lhide'"></span>
-    <span ng-class="active?'l2':'lhide'"></span>
-    <span class="l1"></span>
-    <!--THIS IS THE BOTTOM RIGHT CIRCLE THAT ALWAYS SHOWS-->
-    <span ng-click="active=!active" class="blooming-menu-container-menu-text" ng-bind="active?'close':'menu'"></span>
+        <span ng-class="active?'l5':'lhide'" ng-style="circleStyle(5)"></span>
+        <span ng-class="active?'l4':'lhide'" ng-style="circleStyle(4)"></span>
+        <span ng-class="active?'l3':'lhide'" ng-style="circleStyle(3)"></span>
+        <span ng-class="active?'l2':'lhide'" ng-style="circleStyle(2)"></span>
+        <span class="l1" ng-style="circleStyle(1)"></span>
+
+        <!--THIS IS THE BOTTOM RIGHT CIRCLE THAT ALWAYS SHOWS-->
+        <span ng-click="active=!active"
+              class="blooming-menu-container-menu-text"
+
+              ng-bind="active?'close':'menu'"></span>
 
     <!--THIS IS THE MENU THAT FLIES IN FROM RIGHT-->
-    <span class="buttons-all"  ng-class="active?'buttons-all':'buttons-all-inactive'" ng-click="selectme()">
+    <span class="buttons-all" ng-class="active?'buttons-all':'buttons-all-inactive'">
 
         <!--THIS IS THE LAYER FOR BUTTONS THAT ARE PARTIALLY TRANSPARENT-->
         <span class="button-container">
-            <span class="button-container-button" ng-click="selectme(22)">HOME</span>
-            <span class="button-container-button" ng-click="selectme('MY DASHBOARD')">MY DASHBOARD</span>
-            <span class="button-container-button" ng-click="selectme('MY PLAN')">MY PLAN</span>
-            <span class="button-container-button" ng-click="selectme('FIND CARE')">FIND CARE</span>
-            <span class="button-container-button" ng-click="selectme('CONTACT US')">CONTACT US</span>
+            <span class="button-container-button">HOME</span>
+            <span class="button-container-button">MY DASHBOARD</span>
+            <span class="button-container-button">MY PLAN</span>
+            <span class="button-container-button">FIND CARE</span>
+            <span class="button-container-button">CONTACT US</span>
         </span>
 
         <!--THIS IS THE LAYER IDENTICAL TO ABOVE LAYER THAT SHOWS TOTALLY NON-TRANSPARENT TEXT-->
-        <span class="button-container" >
-            <span class="button-container-text">HOME</span>
-            <span class="button-container-text">MY DASHBOARD</span>
-            <span class="button-container-text">MY PLAN</span>
-            <span class="button-container-text">FIND CARE</span>
-            <span class="button-container-text">CONTACT US</span>
+        <span class="button-container">
+            <span class="button-container-text" ng-click="selectme('HOME',$event)">HOME</span>
+            <span class="button-container-text" ng-click="selectme('MY DASHBOARD',$event)">MY DASHBOARD</span>
+            <span class="button-container-text" ng-click="selectme('MY PLAN',$event)">MY PLAN</span>
+            <span class="button-container-text" ng-click="selectme('FIND CARE',$event)">FIND CARE</span>
+            <span class="button-container-text" ng-click="selectme('CONTACT US',$event)">CONTACT US</span>
         </span>
+    </span>
 
         <!--THIS IS CONTAINER FOR FLOATING LINKS -->
         <span class="non-button-button-container">
@@ -43,5 +50,4 @@
             <span class="non-button-button-text">Log out</span>
         </span>
 
-    </span>
- </span>
+</span>
