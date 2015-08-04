@@ -6,9 +6,17 @@
             restrict:'E',
             templateUrl:"bloomingMenu.template.html",
             controller:function($scope){
+                $scope.active=true;
                 console.log(window.innerHeight);
                 var winH=window.innerHeight;
                 var winW = window.innerWidth;
+                $scope.menuDimensions=function(){
+                    if($scope.active){
+                    return{width:winW,height:winH}
+                }
+                    var circ1=$scope.circleStyle(1);
+                    return{width:circ1.width,height:circ1.height};
+                }
 
                 $scope.circleStyle=function(level) {
                     var topSpace=0;
@@ -49,7 +57,7 @@
                 }
             },
             link:function(scp,el,attr){
-                scp.active=true;
+
 
             }
         }

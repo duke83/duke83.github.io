@@ -6,31 +6,11 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="bloomingMenu.css">
 </head>
-<body ng-app="app" style="min-height: 100%">
+<body ng-app="app" style="position:absolute; left:0; right:0; top:0;bottom:0; overflow: auto;">
 
 
 <blooming-menu></blooming-menu>
-<span class="positioned-content"  style="z-index: 1; top:100px;  width: 320px;  height: 480px;">
 
-    menu-parent-1 (320x480)
-    <h1 style="z-index: 1;">some content with rogue z</h1>
-    <h1>some content</h1>
-    <h2>some content</h2>
-
-</span>
-
-<span class="positioned-content" style=" top:600px;  width: 480px;  height: 320px;">
-        menu-parent-2 (480x320)
-    <h2>some content</h2>
-    <h2>some content</h2>
-    <h2>some content</h2>
-    <h1>some content</h1>
-    <h1>some content</h1>
-    <h2>some content</h2>    <h1>some content</h1>
-    <h1>some content</h1>
-    <h2>some content</h2>
-
-</span>
 
 The blooming-menu directive can be placed anywhere on the page.  It has a z-index of 10, and should always have
 a higher z-index than any other page elements.
